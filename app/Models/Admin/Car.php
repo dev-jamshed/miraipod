@@ -11,6 +11,9 @@ class Car extends Model
     protected $fillable = [
         'name', // Add 'name' here
         'chassis_no',
+        'stock_id',
+        'body_type',
+        'year_month',
         'model_grade',
         'slug',
         'engine_type',
@@ -28,4 +31,8 @@ class Car extends Model
         'cc',
         'status'
     ];
+    public function carImages()
+    {
+        return $this->hasMany(Item_image::class);
+    }
 }

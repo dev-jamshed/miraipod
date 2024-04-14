@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('stock_id')->unique()->default($this->generateUniqueStockId());
+            $table->bigInteger('stock_id')->unique();
             $table->string('status');
             $table->string('chassis_no');
             $table->string('model_grade');
@@ -48,8 +48,5 @@ return new class extends Migration
     /**
      * Generate a unique random 10-digit number.
      */
-    private function generateUniqueStockId()
-    {
-        return mt_rand(1000000000, 9999999999);
-    }
+   
 };

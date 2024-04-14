@@ -9,4 +9,10 @@ class Make extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'slug','status'];
+    
+    public function makeImages()
+    {
+        return $this->hasMany(Item_image::class);
+    }
+
 }

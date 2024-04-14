@@ -1,5 +1,69 @@
 @extends('admin.layout.app')
 @section('content')
+<style>
+    a {
+        cursor: pointer;
+    }
+
+    .flex {
+        gap: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .colorimage {
+        width: 90px;
+        margin: 2px;
+    }
+
+    .colorimage-row {
+        /* border: .5px solid gray; */
+        border-radius: 5px;
+        padding: 10px 0px !important
+    }
+
+    #product-gallery {
+        margin: 20px 0px !important;
+        margin-bottom: 40px !important;
+        border: 1px solid #afa6a6;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .dropzoneimg {
+        /* margin: 20px 5px!important; */
+        margin-bottom: 21px !important;
+        border: 1px solid #afa6a6;
+        border-radius: 10px;
+        padding: 10px 20px;
+    }
+
+    .dropzoneimg .card-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px !important;
+        padding-top: 8px !important;
+    }
+
+    .img-delte-btn {
+        background: #ef020263;
+        padding: 8px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all .2s;
+        cursor: pointer;
+    }
+
+    .img-delte-btn:hover {
+        color: white !important;
+        background-color: #f10017;
+    }
+</style>
     {{-- {{$categories.id}} --}}
 
     <section class="content-header">
@@ -78,6 +142,24 @@
                                     </select>
                                 </div>
                             </div> --}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>Car Image</label>
+                            <input type="file" type="file" class="form-control" accept=".jpg, .png, image/jpeg, image/png"
+                                multiple id="images" name="images[]">
+            
+            
+            
+                        </div>
+            
+                    </div>
+                    <div class="col-12">
+                        <div class="row gx-2 gy-2" id="product-gallery">
+            
+            
                         </div>
                     </div>
 
@@ -173,5 +255,67 @@
                 }
             })
         })
+    </script>
+      <script>
+        $(document).ready(function() {
+            $('#images').change(function() {
+
+                var formData = new FormData();
+                var files = $(this)[0].files;
+
+                // Append each file to the FormData object
+                for (var i = 0; i < files.length; i++) {
+                    formData.append('images[]', files[i]);
+                }
+                document.getElementById("btn").disabled = true;
+
+                $.ajax({
+                    url: '{{ route('admin.temp-images-create') }}',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        $("#image_id").val(response.image_id);
+                    },
+                    success: function(response) {
+                        document.getElementById("btn").disabled = false;
+                        // Handle success response
+
+                        console.log(response);
+                        response.images.forEach(element => {
+
+                            let html = `
+                         <div class="col-lg-3 col-md-4 col-sm-6  " id="image-row-${element.image_id}">
+                         <div class="dropzoneimg p-2" >
+                         <img src="${element.image_path}"  class="card-img-top product_image" alt="...">
+                         <input readonly type="text" hidden name="images_array[]" value="${element.image_id}">
+                         <div class="card-body">
+                         <a onclick="deleteImae(${element.image_id})" class="img-delte-btn">Delete</a>
+                         </div>
+                         </div>
+                         </div>
+                         `;
+                            $('#product-gallery').append(html)
+
+                        });
+
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+
+
+
+        function deleteImae(id) {
+            $('#image-row-' + id).remove();
+        }
     </script>
 @endsection

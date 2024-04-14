@@ -5,10 +5,13 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tmp_image extends Model
+class Item_image extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name'
+        'car_id',
+        'make_id',
+        'type_id',
+        'image'
     ];
 }

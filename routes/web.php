@@ -34,6 +34,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('fob', FobController::class)->except(['show']);
     Route::resource('exchange_rates', ExchangeRateController::class)->except(['show']);
     Route::resource('cars', CarController::class)->except(['show']);
+    Route::post('delete_item_image',[CarController::class,'delete_item_image'])->name('delete_item_image');
+    Route::post('temp-images-create', [CarController::class,'tempImagesCreate'])->name('temp-images-create');
 });
 
 Route::get('generateSlug', function (Request $request) {

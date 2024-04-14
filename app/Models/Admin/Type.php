@@ -14,4 +14,8 @@ class Type extends Model
         'slug',
         'status'
     ];
+    public function typeImages()
+    {
+        return $this->hasMany(Item_image::class);
+    }
 }

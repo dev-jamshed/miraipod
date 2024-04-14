@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\Make;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Models\Admin\tmp_image;
 use App\Models\Admin\Type;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\Admin\Item_image;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class BodyTypeController extends Controller
@@ -39,11 +43,40 @@ class BodyTypeController extends Controller
             'slug' => 'required|unique:types,slug',
         ]);
         if ($validator->passes()) {
-            Type::create([
+          $bodyType =   Type::create([
                 'name' => $request->name,
                 'slug' => $request->slug,
                 'status' =>  $request->status,
             ]);
+
+
+            if (!empty($request->images_array)) {
+                foreach ($request->images_array as $temp_img_id) {
+                    $temp_img = tmp_image::find($temp_img_id);
+                    $ext = last(explode('.', $temp_img->name));
+                    $bodyType_image = new Item_image();
+                    $image_name =  'bodyType' . '-' . $bodyType->id . '-' . Str::random(6) . time() . '.' . $ext; // Access id property of $make
+                    $bodyType_image->type_id =  $bodyType->id;
+                    $bodyType_image->image = $image_name;
+                    $bodyType_image->save();
+
+                    // Copy image to new location
+                    $tempImagePath = public_path('temp/' . $temp_img->name);
+                    $newImagePath = public_path('images/bodyType/' . $image_name);
+                    File::copy($tempImagePath, $newImagePath);
+                    // Delete temporary image record from database
+                    $temp_img->delete() ;
+
+
+
+                    // Delete temporary image file from storage
+                    if (File::exists($tempImagePath)) {
+                        File::delete($tempImagePath);
+                    }
+                }
+            }
+
+
             return response()->json([
                 'status' => true,
                 'message' => 'Body Type created successfully.'
@@ -72,7 +105,8 @@ class BodyTypeController extends Controller
      */
     public function edit($id)
     {
-        $bodyType = Type::findOrFail($id); // Find Make by ID
+        $bodyType = Type::with('typeImages')->findOrFail($id); // Find Make by ID
+        // return $bodyType;
         return view('admin.bodyType.edit', compact('bodyType')); // Return edit Make form view
     }
 
@@ -82,18 +116,46 @@ class BodyTypeController extends Controller
     public function update(Request $request, $id)
     {
 
-        $Type = Type::findOrFail($id);
+        $bodyType = Type::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'slug' => 'required|unique:types,slug,' . $id . ',id'
         ]);
         if ($validator->passes()) {
-            $Type->update([
-                'name' => $request->name,
-                'slug' => $request->slug,
-                'status' =>  $request->status,
-            ]);
+        
+
+            $bodyType->name =$request->name;
+            $bodyType->slug =$request->slug;
+            $bodyType->status =$request->status;
+
+            if (!empty($request->images_array)) {
+                foreach ($request->images_array as $temp_img_id) {
+                    $temp_img = tmp_image::find($temp_img_id);
+                    $ext = last(explode('.', $temp_img->name));
+                    $bodyType_image = new Item_image();
+                    $image_name =  'bodyType' . '-' . $bodyType->id . '-' . Str::random(6) . time() . '.' . $ext; // Access id property of $make
+                    $bodyType_image->type_id =  $bodyType->id;
+                    $bodyType_image->image = $image_name;
+                    $bodyType_image->save();
+    
+                    // Copy image to new location
+                    $tempImagePath = public_path('temp/' . $temp_img->name);
+                    $newImagePath = public_path('images/bodyType/' . $image_name);
+                    File::copy($tempImagePath, $newImagePath);
+                    // Delete temporary image record from database
+                    $temp_img->delete();
+    
+    
+    
+                    // Delete temporary image file from storage
+                    if (File::exists($tempImagePath)) {
+                        File::delete($tempImagePath);
+                    }
+                }
+            }
+
+
             return response()->json([
                 'status' => true,
                 'message' => 'Body Type updated successfully.'
