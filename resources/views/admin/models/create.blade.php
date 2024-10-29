@@ -1,96 +1,89 @@
-@extends('admin.layout.app')
-@section('content')
-    {{-- {{$categories.id}} --}}
 
-    <section class="content-header">
-        <div class="container-fluid my-2">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Create Model</h1>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="{{ route('admin.model.index') }}" class="btn btn-primary">Back</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
+@extends('admin.layout.app')
+
+@section('title','Model - Create')
+
+@section('content')
+<section class="section">
+    <div class="section-body">
         <form id='subcategoryForm'>
             @csrf
-            <!-- Default box -->
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
+        <div class="row">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="name">Make</label>
-                                    <select name="make" id="category" class="form-control">
-                                        <option value="">Please Select Make</option>
-                                        @if ($makes->isNotEmpty())
-                                            {
-                                            @foreach ($makes as $make)
-                                                <option value=" {{ $make->id }}"> {{ $make->name }}</option>
-                                            @endforeach
-                                            }
-                                        @endif
 
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="name">Status</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="1">Active</option>
-                                        <option value="0">Block</option>
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" id="name" class="form-control"
-                                        placeholder="Name">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="slug">Slug</label>
-                                    <input readonly type="text" name="slug" id="slug" class="form-control"
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between py-3 ">
+                  <h4>Create Model</h4>
+                  <a href="{{ route('admin.model.index') }}" class="btn btn-primary">Back</a>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-12">
+              <div class="card">
+              
+                <div class="card-body">
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" id="name" class="form-control"
+                                        placeholder="Name" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Slug</label>
+                        <input readonly type="text" name="slug" id="slug" class="form-control"
                                         placeholder="Slug">
-                                    <p></p>
-                                </div>
-                            </div>
-                            {{-- <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status">Show On Home</label>
-                                    <select name="showOnHome" id="status" class="form-control" id="">
-                                        <option value="Yes">Yes</option>
-                                        <option selected value="No">No</option>
-                                    </select>
-                                </div>
-                            </div> --}}
-                        </div>
+                      </div>
                     </div>
 
+                  
+                    
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Make</label>
+                        <select name="make" id="category" class="form-control" required>
+                            <option value="">Please Select Make</option>
+                            @if ($makes->isNotEmpty())
+                                {
+                                @foreach ($makes as $make)
+                                    <option value=" {{ $make->id }}"> {{ $make->name }}</option>
+                                @endforeach
+                                }
+                            @endif
 
-                </div>
-                <div class="pb-5 pt-3">
-                    <button id="btn" class="btn btn-primary">Create</button>
-                    <a href="{{ route('admin.model.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
-                </div>
+                        </select>
+                      </div>
+                    </div>
+                  
+                    
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Status</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Block</option>
+                        </select>
+                      </div>
+                    </div>
+  
+                  </div>
+                  <div class="card-footer text-left">
+                    <button id="btn" class="btn btn-primary mr-1" type="submit">Submit</button>
+                  </div>
+
+              </div>
             </div>
-        </form>
-        <!-- /.card -->
-    </section>
-    <!-- /.content -->
+
+          </div>
+        </div>
+      </form>
+  </section>
 @endsection
 @section('customJs')
     <script>

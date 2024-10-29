@@ -1,0 +1,1 @@
+<img width="200" style="max-width:200px;width:100%;border-radius:15px" src="{{asset('frontend')}}/images/logo.png" alt=""> 

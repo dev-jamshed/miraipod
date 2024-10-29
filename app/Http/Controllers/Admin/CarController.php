@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\Car;
+use App\Models\Admin\Make;
 use App\Models\Admin\Type;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+
 use App\Models\Admin\tmp_image;
 use App\Models\Admin\Item_image;
-use Illuminate\Support\Str;
-
-use Illuminate\Http\Request;
+use App\Models\Admin\Transmission;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +32,9 @@ class CarController extends Controller
     public function create()
     {
         $bodyTypes =  Type::get();
-        return view('admin.cars.create', compact('bodyTypes'));
+        $transmissions = Transmission::all();
+        $makes =  Make::get();
+        return view('admin.cars.create', compact('bodyTypes','makes','transmissions'));
     }
 
     /**
@@ -38,27 +42,36 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+
+        //   return response()->json([
+        //     'make_id' => $request->make_id,
+        //     'model_id' => $request->model_id 
+        // ]);
+
         // return $request->body_type;
         $validator = Validator::make($request->all(), [
             'body_type' => 'required|integer|max:255',
-            'chassis_no' => 'required|max:255',
+            'chassis_no' => 'max:255',
             'model_grade' => 'required|max:255',
             'slug' => 'required|max:255',
             'show_cnf_price' => 'required|boolean',
             'status' => 'required|boolean',
-            'cc' => 'required|integer'
+            'make_id' => 'required',
+            'model_id' => 'required',
+            'cc' => 'required|integer',
+            'wheels' => 'required'
         ]);
         if ($validator->passes()) {
 
-           
+
             $lastCar = Car::orderBy('id', 'desc')->first(); // Get the last car record
             if ($lastCar) {
                 // Extract the stock ID and increment it by 1
                 $lastStockId = $lastCar->stock_id;
-                $newStockId = $lastStockId + 1;
+                $newStockId = $lastStockId + 19;
             } else {
                 // If there are no previous records, start from 3714323372
-                $newStockId = 3714323372;
+                $newStockId = 371432332823;
             }
             $carData = [
                 'stock_id' => $newStockId,
@@ -70,7 +83,7 @@ class CarController extends Controller
                 'drive' => $request->drive,
                 'transmission' => $request->transmission,
                 'condition' => $request->condition,
-                'year_month' => $request->year,
+                'year_month' => $request->year_month,
                 'color' => $request->color,
                 'doors' => $request->doors,
                 'seats' => $request->seats,
@@ -80,11 +93,19 @@ class CarController extends Controller
                 'fuel' => $request->fuel,
                 'mileage' => $request->mileage,
                 'cc' => $request->cc,
-                'status' => $request->status
+                'status' => $request->status,
+                'negotiation' => $request->negotiation,
+                'featured' => $request->featured,
+                'make_id' => $request->make_id,
+                'model_id' => $request->model_id,
+                'showChassis' => $request->showChassis,
+                'yt_link' => $request->yt_link,
+                'wheels' => $request->wheels,
             ];
 
             $car = Car::create($carData); // Create Car instance
-
+            
+            
             if (!empty($request->images_array)) {
                 foreach ($request->images_array as $temp_img_id) {
                     $temp_img = tmp_image::find($temp_img_id);
@@ -100,7 +121,7 @@ class CarController extends Controller
                     $newImagePath = public_path('images/car/' . $image_name);
                     File::copy($tempImagePath, $newImagePath);
                     // Delete temporary image record from database
-                    $temp_img->delete() ;
+                    $temp_img->delete();
 
 
 
@@ -153,116 +174,116 @@ class CarController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $bodyTypes =  Type::get();
         $car = Car::with('carImages')->find($id);
+        $makes =  Make::get();
+        $transmissions = Transmission::all();
+
+        // dd($car);
 
         // return $car->carImages;
 
-        return view('admin.cars.edit',compact('bodyTypes','car'));
+        return view('admin.cars.edit', compact('bodyTypes', 'car','makes','transmissions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {   
+    {
+
         $car = Car::findOrFail($id);
 
-            // return $request->body_type;
-            $validator = Validator::make($request->all(), [
-                'body_type' => 'required|integer|max:255',
-                'chassis_no' => 'required|max:255',
-                'model_grade' => 'required|max:255',
-                'slug' => 'required|max:255',
-                'show_cnf_price' => 'required|boolean',
-                'status' => 'required|boolean',
-                'cc' => 'required|integer'
-            ]);
-            if ($validator->passes()) {
-    
-               
-                $lastStockId = Car::max('stock_id') ?? 3714323372;
-                $newStockId = $lastStockId + 1;
-                
-                $carData = array_merge(
-                    ['stock_id' => $newStockId],
-                    $request->only([
-                        'body_type',
-                        'chassis_no',
-                        'model_grade',
-                        'slug',
-                        'engine_type',
-                        'drive',
-                        'transmission',
-                        'condition',
-                        'year_month',
-                        'color',
-                        'doors',
-                        'seats',
-                        'm3',
-                        'fob_price',
-                        'show_cnf_price',
-                        'fuel',
-                        'mileage',
-                        'cc',
-                        'status'
-                    ])
-                );
-                
-                $car->fill($carData); // Fill the car instance with the new data
-                $car->save(); // Save the updated car data into the database/ Create Car instance
-                
-    
-                if (!empty($request->images_array)) {
-                    foreach ($request->images_array as $temp_img_id) {
-                        $temp_img = tmp_image::find($temp_img_id);
-                        $ext = last(explode('.', $temp_img->name));
-                        $car_image = new Item_image();
-                        $image_name =  'car' . '-' . $car->id . '-' . Str::random(6) . time() . '.' . $ext; // Access id property of $car
-                        $car_image->image = $image_name;
-                        $car_image->car_id =  $car->id;
-                        $car_image->save();
-        
-                        // Copy image to new location
-                        $tempImagePath = public_path('temp/' . $temp_img->name);
-                        $newImagePath = public_path('images/car/' . $image_name);
-                        File::copy($tempImagePath, $newImagePath);
-                        // Delete temporary image record from database
-                        $temp_img->delete();
-        
-        
-        
-                        // Delete temporary image file from storage
-                        if (File::exists($tempImagePath)) {
-                            File::delete($tempImagePath);
-                        }
+        $validator = Validator::make($request->all(), [
+            'body_type' => 'required|integer|max:255',
+            'chassis_no' => 'max:255',
+            'model_grade' => 'required|max:255',
+            'slug' => 'required|max:255',
+            'show_cnf_price' => 'required|boolean',
+            'status' => 'required|boolean',
+            'cc' => 'required|integer',
+            'make_id' => 'required',
+            'model_id' => 'required',
+            'wheels' => 'required'
+        ]);
+        if ($validator->passes()) {
+
+
+            $lastStockId = Car::max('stock_id') ?? 3714323372;
+            $newStockId = $lastStockId + 1;
+
+            $carData = array_merge(
+                ['stock_id' => $newStockId],
+                $request->only([
+                    'body_type',
+                    'chassis_no',
+                    'model_grade',
+                    'slug',
+                    'engine_type',
+                    'drive',
+                    'transmission',
+                    'condition',
+                    'year_month',
+                    'color',
+                    'doors',
+                    'seats',
+                    'm3',
+                    'fob_price',
+                    'show_cnf_price',
+                    'fuel',
+                    'mileage',
+                    'cc',
+                    'status',
+                    'negotiation',
+                    'featured',
+                    'make_id',
+                    'model_id',
+                    'showChassis',
+                    'yt_link',
+                    'wheels'
+                ])
+            );
+
+            $car->fill($carData); // Fill the car instance with the new data
+            $car->save(); // Save the updated car data into the database/ Create Car instance
+
+
+            if (!empty($request->images_array)) {
+                foreach ($request->images_array as $temp_img_id) {
+                    $temp_img = tmp_image::find($temp_img_id);
+                    $ext = last(explode('.', $temp_img->name));
+                    $car_image = new Item_image();
+                    $image_name =  'car' . '-' . $car->id . '-' . Str::random(6) . time() . '.' . $ext; // Access id property of $car
+                    $car_image->image = $image_name;
+                    $car_image->car_id =  $car->id;
+                    $car_image->save();
+
+                    // Copy image to new location
+                    $tempImagePath = public_path('temp/' . $temp_img->name);
+                    $newImagePath = public_path('images/car/' . $image_name);
+                    File::copy($tempImagePath, $newImagePath);
+                    // Delete temporary image record from database
+                    $temp_img->delete();
+
+                    // Delete temporary image file from storage
+                    if (File::exists($tempImagePath)) {
+                        File::delete($tempImagePath);
                     }
                 }
-                
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Car created successfully.'
-                ]);
             }
-    
+
             return response()->json([
-                'status' => false,
-                'errors' => $validator->errors()
+                'status' => true,
+                'message' => 'Car created successfully.'
             ]);
-        
+        }
+
+        return response()->json([
+            'status' => false,
+            'errors' => $validator->errors()
+        ]);
     }
 
     /**
@@ -270,13 +291,16 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $car = Car::with('carImages')->find($id);
+        $car->carImages()->delete();
+        $car->delete();
+        return redirect()->route('admin.cars.index')->with('success', 'Car deleted successfully.');
     }
     public function delete_item_image(Request $req)
     {
         // Retrieve the image record from the database
         $item_image = Item_image::findOrFail($req->id);
-    
+
         // Check if the image record exists
         if (!empty($item_image)) {
             // Delete the file from storage
@@ -286,10 +310,10 @@ class CarController extends Controller
                     File::delete($imagePath);
                 }
             }
-    
+
             // Delete the record from the database
             $item_image->delete();
-    
+
             return response()->json([
                 'status' => true,
                 'message' => 'Image deleted successfully'

@@ -1,65 +1,61 @@
 @extends('admin.layout.app')
+
+@section('title','Exchange Rate - Edit')
+
 @section('content')
-    {{-- @php
-    print_r($categories);
-    die();
-@endphp --}}
-    <section class="content-header">
-        <div class="container-fluid my-2">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Edit exchange_rates</h1>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="{{ route('admin.exchange_rates.index') }}" class="btn btn-primary">Back</a>
-                </div>
+<section class="section">
+    <div class="section-body">
+      <form  id='subcategoryForm'>
+        @csrf
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header d-flex align-items-center justify-content-between py-3 ">
+                <h4>Create Exchange Rate</h4>
+                <a href="{{ route('admin.exchange_rates.index') }}" class="btn btn-primary">Back</a>
+              </div>
             </div>
-        </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <form id='subcategoryForm'>
-            @csrf
-            <!-- Default box -->
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-
-                        <div class="row">
+          </div>
 
 
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="name">Name</label>
-                                    <input type="text" value="{{ $exchangeRate->currency }}" name="currency" id="currency"
-                                        class="form-control" placeholder="currency">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="email">Slug</label>
-                                    <input value="{{ $exchangeRate->rate }}" type="number" name="rate"
-                                        id="rate" class="form-control" placeholder="rate" step="0.01">
-                                    <p></p>
-                                </div>
-                            </div>
-                            
-                            
-                        </div>
+          <div class="col-12">
+            <div class="card">
+            
+              <div class="card-body">
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Currency</label>
+                      <input type="text" value="{{ $exchangeRate->currency }}" name="currency" id="currency" class="form-control"
+                      placeholder="currency" required>
                     </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Rate</label>
+                      <input type="number" value="{{ $exchangeRate->rate }}" name="rate" id="rate" class="form-control" placeholder="rate" step="0.01" required>
+                    </div>
+                  </div>
+                  
 
                 </div>
-                <div class="pb-5 pt-3">
-                    <button id="btn" class="btn btn-primary">Update</button>
-                    <a href="{{ route('admin.exchange_rates.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
+                <div class="card-footer text-left">
+                  <button  id="btn" class="btn btn-primary mr-1" type="submit">Update</button>
                 </div>
+
             </div>
-        </form>
-        <!-- /.card -->
-    </section>
-    <!-- /.content -->
+          </div>
+
+
+
+
+        </div>
+        </div>
+    </form>
+
+  </section>
 @endsection
 @section('customJs')
     <script>
@@ -110,3 +106,4 @@
         })
     </script>
 @endsection
+

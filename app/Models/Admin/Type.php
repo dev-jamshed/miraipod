@@ -18,4 +18,8 @@ class Type extends Model
     {
         return $this->hasMany(Item_image::class);
     }
+    public function cars()
+{
+    return $this->hasMany(Car::class, 'body_type');
+}
 }

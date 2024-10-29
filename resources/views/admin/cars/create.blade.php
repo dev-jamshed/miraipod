@@ -1,323 +1,342 @@
 @extends('admin.layout.app')
+
+@section('title', 'Cars - Create')
+
 @section('content')
-    <style>
-        a {
-            cursor: pointer;
-        }
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
 
-        .flex {
-            gap: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
 
-        .colorimage {
-            width: 90px;
-            margin: 2px;
-        }
-
-        .colorimage-row {
-            /* border: .5px solid gray; */
-            border-radius: 5px;
-            padding: 10px 0px !important
-        }
-
-        #product-gallery {
-            margin: 20px 0px !important;
-            margin-bottom: 40px !important;
-            border: 1px solid #afa6a6;
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        .dropzoneimg {
-            /* margin: 20px 5px!important; */
-            margin-bottom: 21px !important;
-            border: 1px solid #afa6a6;
-            border-radius: 10px;
-            padding: 10px 20px;
-        }
-
-        .dropzoneimg .card-body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0px !important;
-            padding-top: 8px !important;
-        }
-
-        .img-delte-btn {
-            background: #ef020263;
-            padding: 8px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all .2s;
-            cursor: pointer;
-        }
-
-        .img-delte-btn:hover {
-            color: white !important;
-            background-color: #f10017;
-        }
-    </style>
-
-    {{-- {{$categories.id}} --}}
-
-    <section class="content-header">
-        <div class="container-fluid my-2">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Create bodyType</h1>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between py-3 ">
+                            <h4>Add Car</h4>
+                            <a href="{{ route('admin.bodyType.index') }}" class="btn btn-primary">Back</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-6 text-right">
-                    <a href="{{ route('admin.bodyType.index') }}" class="btn btn-primary">Back</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <form id='subcategoryForm'>
-            @csrf
-            <!-- Default box -->
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="name">bodyType</label>
-                                    <select name="body_type" id="category" class="form-control">
-                                        <option value="">Please Select bodyType</option>
-                                        @if ($bodyTypes->isNotEmpty())
-                                            {
-                                            @foreach ($bodyTypes as $bodyType)
-                                                <option value=" {{ $bodyType->id }}"> {{ $bodyType->name }}</option>
-                                            @endforeach
-                                            }
-                                        @endif
 
-                                    </select>
-                                    <p></p>
+
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <form id='subcategoryForm'>
+                                @csrf
+                                <div class="row">
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Make</label>
+                                            <select onchange="callToModel(this.value)" name="make_id" id="make_id"
+                                                class="form-control" required>
+                                                <option disabled selected>Select Make</option>
+                                                @foreach ($makes as $make)
+                                                    <option value="{{ $make->id }}">{{ $make->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Model</label>
+                                            <select name="model_id" id="model_id" class="form-control" required>
+                                                <option selected disabled>Select Model</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Model Grade</label>
+                                            <input type="text" name="model_grade" id="model_grade" class="form-control"
+                                                required placeholder="Model Grade...">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Year / Month</label>
+                                            <input type="month" name="year_month" id="year_month" class="form-control"
+                                                placeholder="Year / Month" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>FOB Price</label>
+                                            <input type="number" name="fob_price" id="fob_price" class="form-control"
+                                                placeholder="Fob Price..." required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Chassis No (Optional)</label>
+                                            <input type="text" name="chassis_no" id="chassis_no" class="form-control"
+                                                placeholder="Chassis no...">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Slug</label>
+                                            <input readonly type="text" name="slug" id="slug"
+                                                class="form-control" placeholder="Slug" required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Engine Type</label>
+                                            <input type="text" name="engine_type" id="engine_type" class="form-control"
+                                                placeholder="Engine Type..." required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>color</label>
+                                            <input type="text" name="color" id="color" class="form-control"
+                                                placeholder="Color..." required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Doors</label>
+                                            <input type="number" name="doors" id="doors" class="form-control"
+                                                placeholder="Doors..." required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Seats</label>
+                                            <input type="number" name="seats" id="seats" class="form-control"
+                                                placeholder="Seats..." required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>M3</label>
+                                            <input type="number" name="m3" id="m3" class="form-control"
+                                                placeholder="M3..." required>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fuel</label>
+                                            <select name="fuel" id="fuel" class="form-control" required>
+                                                <option disabled>Select Fuel</option>
+                                                <option value="Petrol">Petrol</option>
+                                                <option value="Diesel">Diesel</option>
+                                                <option value="Gasoline">Gasoline</option>
+                                                <option value="Hybrid">Hybrid</option>
+                                                <option value="LPG">LPG</option>
+                                                <option value="Electric">Electric</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Mileage</label>
+                                            <input type="number" name="mileage" id="mileage" class="form-control"
+                                                placeholder="Mileage..." required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>CC</label>
+                                            <input type="number" name="cc" class="form-control"
+                                                placeholder="cc..." required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Youtube Link</label>
+                                            <input type="text" name="yt_link" class="form-control"
+                                                placeholder="yt_link...">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Body Type</label>
+                                            <select name="body_type" id="category" class="form-control" required>
+                                                <option value="">Please Select bodyType</option>
+                                                @if ($bodyTypes->isNotEmpty())
+                                                    {
+                                                    @foreach ($bodyTypes as $bodyType)
+                                                        <option value=" {{ $bodyType->id }}"> {{ $bodyType->name }}
+                                                        </option>
+                                                    @endforeach
+                                                    }
+                                                @endif
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Drive</label>
+                                            <select name="drive" id="drive" class="form-control" required>
+                                                <option value="RHS">RHS</option>
+                                                <option value="LHS">LHS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>wheels</label>
+                                            <select name="wheels" id="wheels" class="form-control" required>
+                                                <option value="2">2</option>
+                                                <option value="4">4</option>
+                                                <option value="6">6</option>
+                                                <option value="8">8</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Transmission</label>
+                                            <select name="transmission" id="transmission" class="form-control" required>
+                                                <!-- Loop through all transmissions fetched from the database -->
+                                                @foreach ($transmissions as $transmission)
+                                                    <option value="{{ $transmission->name }}">{{ $transmission->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Condition</label>
+                                            <select name="condition" id="condition" class="form-control" required>
+                                                <option value="new">New</option>
+                                                <option selected value="Used">Used</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Show CNF Price</label>
+                                            <select name="show_cnf_price" id="show_cnf_price" class="form-control"
+                                                required>
+                                                <option value="1">True</option>
+                                                <option value="0">False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Show Chassis No </label>
+                                            <select name="showChassis" id="showChassis" class="form-control" required>
+                                                <option value="1">True</option>
+                                                <option value="0">False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Negotiation</label>
+                                            <select name="negotiation" id="negotiation" class="form-control" required>
+                                                <option value="1">True</option>
+                                                <option value="0">False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Featured</label>
+                                            <select name="featured" id="featured" class="form-control" required>
+                                                <option value="1">True</option>
+                                                <option value="0">False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select name="status" id="status" class="form-control" required>
+                                                <option value="1">Active</option>
+                                                <option value="0">Block</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="section-title">Car Image</div>
+                                            <div class="custom-file">
+                                                <input type="file" type="file" class="form-control"
+                                                    accept=".jpg, .png, image/jpeg, image/png" multiple id="images"
+                                                    name="images[]" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <div class="row gx-2 gy-2" id="product-gallery">
+
+
+                                        </div>
+                                    </div>
+
                                 </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="chassis_no">chassis_no</label>
-                                    <input type="text" name="chassis_no" id="chassis_no" class="form-control"
-                                        placeholder="chassis_no">
-                                    <p></p>
+                                <div class="card-footer text-left">
+                                    <button id="btn" class="btn btn-primary mr-1" type="submit">Submit</button>
                                 </div>
-                            </div>
+                            </form>
 
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="model_grade">model_grade</label>
-                                    <input type="text" name="model_grade" id="model_grade" class="form-control"
-                                        placeholder="model_grade">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="slug">Slug</label>
-                                    <input readonly type="text" name="slug" id="slug" class="form-control"
-                                        placeholder="Slug">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="engine_type">engine_type</label>
-                                    <input type="text" name="engine_type" id="engine_type" class="form-control"
-                                        placeholder="engine_type">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status">drive</label>
-                                    <select name="drive" id="drive" class="form-control">
-                                        <option value="RHS">RHS</option>
-                                        <option value="LHS">LHS</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="transmission">transmission</label>
-                                    <select name="transmission" id="transmission" class="form-control">
-                                        <option value="automatic">automatic</option>
-                                        <option value="manual">manual</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="condition">condition</label>
-                                    <select name="condition" id="condition" class="form-control">
-                                        <option value="new">New</option>
-                                        <option selected value="Used">Used</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="color">color</label>
-                                    <input type="text" name="color" id="color" class="form-control"
-                                        placeholder="color">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="year">Year / Month</label>
-                                    <input type="date" name="year" id="year" class="form-control"
-                                        placeholder="Year / Month">
-
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="doors">doors</label>
-                                    <input type="number" name="doors" id="doors" class="form-control"
-                                        placeholder="doors">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="seats">seats</label>
-                                    <input type="number" name="seats" id="seats" class="form-control"
-                                        placeholder="seats">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="m3">m3</label>
-                                    <input type="number" name="m3" id="m3" class="form-control"
-                                        placeholder="m3" step="0.01">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="fob_price">fob_price</label>
-                                    <input type="number" name="fob_price" id="fob_price" class="form-control"
-                                        placeholder="fob_price" step="0.01">
-                                    <p></p>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="show_cnf_price">show_cnf_price</label>
-                                    <select name="show_cnf_price" id="show_cnf_price" class="form-control">
-                                        <option value="1">True</option>
-                                        <option value="0">False</option>
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="fuel">fuel</label>
-                                    <input type="text" name="fuel" id="fuel" class="form-control"
-                                        placeholder="fuel">
-                                    <p></p>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="mileage">mileage</label>
-                                    <input type="number" name="mileage" id="mileage" class="form-control"
-                                        placeholder="mileage" step="0.01">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="cc">cc</label>
-                                    <input type="number" name="cc" id="cc" class="form-control"
-                                        placeholder="cc" step="0.01">
-                                    <p></p>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="name">Status</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="1">Active</option>
-                                        <option value="0">Block</option>
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-6">
-                                    <label>Car Image</label>
-                                    <input type="file" type="file" class="form-control"
-                                        accept=".jpg, .png, image/jpeg, image/png" multiple id="images"
-                                        name="images[]">
-
-
-
-                                </div>
-
-                            </div>
-                            <div class="col-12">
-                                <div class="row gx-2 gy-2" id="product-gallery">
-
-
-                                </div>
-                            </div>
-
-                            {{-- <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status">Show On Home</label>
-                                    <select name="showOnHome" id="status" class="form-control" id="">
-                                        <option value="Yes">Yes</option>
-                                        <option selected value="No">No</option>
-                                    </select>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
 
 
-                </div>
-                <div class="pb-5 pt-3">
-                    <button id="btn" class="btn btn-primary">Create</button>
-                    <a href="{{ route('admin.bodyType.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
+
+
                 </div>
             </div>
-        </form>
-        <!-- /.card -->
     </section>
-    <!-- /.content -->
 @endsection
 @section('customJs')
     <script>
@@ -338,7 +357,7 @@
                             window.location.href = " {{ route('admin.cars.index') }}"
                         } else {
                             let errors = response.errors
-                         
+
                             if (errors['body_type']) {
                                 $('#category').addClass('is-invalid').next('p').addClass(
                                     'invalid-feedback').html(errors['body_type']);
@@ -383,23 +402,24 @@
         })
 
 
-        //slug genrater
-        $('#model_grade').on('input', function() {
-            element = $(this)
-            tittle = element.val()
+        $('#model_id').on('input', function() {
+            let model = $(this).find('option:selected').text();
+            let make = $('#make_id').find('option:selected').text();
+            let element = make + '-' + model;
+            console.log(element);
             $.ajax({
                 url: "{{ route('generateSlug') }}",
                 type: 'GET',
                 data: {
-                    title: element.val()
+                    title: element
                 },
                 success: function(response) {
-                    if (response['status'] == true) {
-                        $('#slug').val(response['slug'])
+                    if (response.status === true) {
+                        $('#slug').val(response.slug);
                     }
                 }
-            })
-        })
+            });
+        });
     </script>
     <script>
         $(document).ready(function() {
@@ -461,6 +481,44 @@
 
         function deleteImae(id) {
             $('#image-row-' + id).remove();
+        }
+
+
+        function callToModel(id) {
+            console.log(id);
+            let modelSelect = document.getElementById('model_id');
+            $.ajax({
+                url: '{{ route('admin.fetchModels') }}',
+                method: 'POST',
+                data: {
+                    id: id
+                }, // Pass id as an object
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.status !== 404 && response.data.length > 0) {
+                        modelSelect.innerHTML = ''; // Clear existing options
+                        modelSelect.innerHTML = `
+                        <option selected disabled>Select Model</option>
+                        `; // Clear existing options
+                        response.data.forEach(value => {
+                            modelSelect.innerHTML += `
+                                <option value="${value.id}">${value.name}</option>
+                            `;
+                        });
+                    } else {
+                        modelSelect.innerHTML = `
+                            <option selected disabled>No Model Available</option>
+                        `;
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                }
+            });
         }
     </script>
 @endsection

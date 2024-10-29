@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShippingCharge extends Model
 {
-    use HasFactory;
+    use HasFactory; 
 }

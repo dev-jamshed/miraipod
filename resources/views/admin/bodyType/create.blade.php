@@ -1,179 +1,93 @@
 @extends('admin.layout.app')
+
+@section('title','Body Type - Create')
+
 @section('content')
-<style>
-    a {
-        cursor: pointer;
-    }
+<section class="section">
+    <div class="section-body">
+      <form id='subcategoryForm'>
+        @csrf
+        <div class="row">
 
-    .flex {
-        gap: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
 
-    .colorimage {
-        width: 90px;
-        margin: 2px;
-    }
 
-    .colorimage-row {
-        /* border: .5px solid gray; */
-        border-radius: 5px;
-        padding: 10px 0px !important
-    }
 
-    #product-gallery {
-        margin: 20px 0px !important;
-        margin-bottom: 40px !important;
-        border: 1px solid #afa6a6;
-        border-radius: 10px;
-        padding: 20px;
-    }
-
-    .dropzoneimg {
-        /* margin: 20px 5px!important; */
-        margin-bottom: 21px !important;
-        border: 1px solid #afa6a6;
-        border-radius: 10px;
-        padding: 10px 20px;
-    }
-
-    .dropzoneimg .card-body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0px !important;
-        padding-top: 8px !important;
-    }
-
-    .img-delte-btn {
-        background: #ef020263;
-        padding: 8px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all .2s;
-        cursor: pointer;
-    }
-
-    .img-delte-btn:hover {
-        color: white !important;
-        background-color: #f10017;
-    }
-</style>
-    {{-- {{$categories.id}} --}}
-
-    <section class="content-header">
-        <div class="container-fluid my-2">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Create bodyType</h1>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="{{ route('admin.bodyType.index') }}" class="btn btn-primary">Back</a>
-                </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header d-flex align-items-center justify-content-between py-3 ">
+                <h4>Create Body Type</h4>
+                <a href="{{ route('admin.bodyType.index') }}" class="btn btn-primary">Back</a>
+              </div>
             </div>
+          </div>
+
+
+          <div class="col-12">
+            <div class="card">
+            
+              <div class="card-body">
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Slug</label>
+                      <input  readonly type="text" name="slug" id="slug" class="form-control">
+                    </div>
+                  </div>
+
+                
+                
+                  
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Status</label>
+                      <select name="status" id="status" class="form-control" required>
+                          <option value="1">Active</option>
+                          <option value="0">Block</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="section-title">Car Image</div>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="images"  accept=".jpg, .png, image/jpeg, image/png" multiple name="images[]">
+                        <label class="custom-file-label" for="images"  required>Choose Images </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                      <div class="row gx-2 gy-2" id="product-gallery">
+          
+          
+                      </div>
+                  </div>
+
+
+
+                </div>
+                <div class="card-footer text-left">
+                  <button id="btn" class="btn btn-primary mr-1" type="submit" id="btn">Submit</button>
+                </div>
+
+            </div>
+          </div>
+
+
+
+
         </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <form id='subcategoryForm'>
-            @csrf
-            <!-- Default box -->
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-
-                        <div class="row">
-                            {{-- <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="name">bodyType</label>
-                                    <select name="name" id="category" class="form-control">
-                                        <option value="">Please Select bodyType</option>
-                                        @if ($bodyTypes->isNotEmpty())
-                                            {
-                                            @foreach ($makes as $bodyType)
-                                                <option value=" {{ $bodyType->id }}"> {{ $bodyType->name }}</option>
-                                            @endforeach
-                                            }
-                                        @endif
-
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div> --}}
-                           
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" id="name" class="form-control"
-                                        placeholder="Name">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="slug">Slug</label>
-                                    <input readonly type="text" name="slug" id="slug" class="form-control"
-                                        placeholder="Slug">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="name">Status</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="1">Active</option>
-                                        <option value="0">Block</option>
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
-                            {{-- <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status">Show On Home</label>
-                                    <select name="showOnHome" id="status" class="form-control" id="">
-                                        <option value="Yes">Yes</option>
-                                        <option selected value="No">No</option>
-                                    </select>
-                                </div>
-                            </div> --}}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label>Car Image</label>
-                            <input type="file" type="file" class="form-control" accept=".jpg, .png, image/jpeg, image/png"
-                                multiple id="images" name="images[]">
-            
-            
-            
-                        </div>
-            
-                    </div>
-                    <div class="col-12">
-                        <div class="row gx-2 gy-2" id="product-gallery">
-            
-            
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="pb-5 pt-3">
-                    <button id="btn" class="btn btn-primary">Create</button>
-                    <a href="{{ route('admin.bodyType.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
-                </div>
-            </div>
-        </form>
-        <!-- /.card -->
-    </section>
-    <!-- /.content -->
+      </form>
+    </div>
+  </section>
 @endsection
 @section('customJs')
     <script>

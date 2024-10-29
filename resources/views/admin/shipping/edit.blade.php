@@ -1,76 +1,82 @@
+
 @extends('admin.layout.app')
+
+@section('title','Shipping - Edit')
+
 @section('content')
-    <section class="content-header">
-        <div class="container-fluid my-2">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Shippping Edit</h1>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="{{ route('admin.shipping.create') }}" class="btn btn-primary">Back</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <!-- Default box -->
-        <div class="container-fluid">
-            @include('admin.message')
-            <form method="GET" id="shippingForm">
+<section class="section">
+    <div class="section-body">
+        @include('admin.message')
+        <form method="GET" id="shippingForm">
+            <div class="row">
                 @csrf
+
+                <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <select name="country" id="country" class="form-control">
-                                        <option value="">Select a Country</option>
-                                        @if ($countries->isNotEmpty())
-                                            @foreach ($countries as $country)
-                                                <option
-                                                    {{ $shippingCharge->country_id == $country->id ? 'selected' : '' }}
-                                                    value="{{ $country->id }}">{{ $country->name }}</option>
-                                            @endforeach
-                                            <option {{ $shippingCharge->country_id == 'rest_of_world' ? 'selected' : '' }}
-                                                value="rest_of_world">Rest of the World</option>
-                                        @endif
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <input type="port" name="port" id="port"
-                                        value="{{ $shippingCharge->port }}" placeholder="Port" class="form-control">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <input type="number" name="amount" id="amount"
-                                        value="{{ $shippingCharge->amount }}" placeholder="Amount" class="form-control">
-                                    <p></p>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <button id="btn" type="submit" class="btn btn-primary">Update</button>
-                                </div>
-                            </div>
-
-                        </div>
+                    <div class="card-header d-flex align-items-center justify-content-between py-3 ">
+                    <h4>Add Shipping </h4>
+                    <a href="{{route('admin.shipping.index')}}" class="btn btn-primary">Back</a>
                     </div>
                 </div>
+                </div>
 
 
-            </form>
-        </div>
-        <!-- /.card -->
-    </section>
+                <div class="col-12">
+                <div class="card">
+                
+                    <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Port</label>
+                            <input type="text" value="{{ $shippingCharge->port }}" name="port" id="port" placeholder="Port"
+                            class="form-control" required>
+                        </div>
+                        </div>
+
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="number" value="{{ $shippingCharge->amount }}" name="amount" id="amount" placeholder="Amount"
+                                                class="form-control" required>
+                        </div>
+                        </div>
+                    
+                        
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Country</label>
+                            <select name="country" id="country" class="form-control" required>
+                                <option value="">Select a Country</option>
+                                @if ($countries->isNotEmpty())
+                                    @foreach ($countries as $country)
+                                        <option
+                                            {{ $shippingCharge->country_id == $country->id ? 'selected' : '' }}
+                                            value="{{ $country->id }}">{{ $country->name }}</option>
+                                    @endforeach
+                                    <option {{ $shippingCharge->country_id == 'rest_of_world' ? 'selected' : '' }}
+                                        value="rest_of_world">Rest of the World</option>
+                                @endif
+                            </select>
+                        </div>
+                        </div>
+                    
+                    </div>
+                    <div class="card-footer text-left">
+                        <button id="btn" class="btn btn-primary mr-1" type="submit">Submit</button>
+                    </div>
+
+                </div>
+                </div>
+
+
+
+
+            </div>
+        </form>
+    </div>
+  </section>
 @endsection
 @section('customJs')
     <script>
@@ -93,7 +99,7 @@
                     success: function(response) {
                         $('#btn').attr('disabled', false);
                         if (response.status == true) {
-                            window.location.href = "{{ route('admin.shipping.create') }}";
+                            window.location.href = "{{ route('admin.shipping.index') }}";
                         } else {
                             let errors = response.errors;
 
@@ -131,3 +137,4 @@
         });
     </script>
 @endsection
+

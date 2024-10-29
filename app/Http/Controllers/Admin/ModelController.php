@@ -26,6 +26,23 @@ class ModelController extends Controller
 
         return view('admin.models.index', compact('models'));
     }
+    public function fetchModels(Request $req)
+    {
+
+        $fetchModels = CarsModel::where('make_id',$req->id)->get();
+
+        if(count($fetchModels) > 0){
+            return response()->json([
+                'status' => 200,
+                'data' => $fetchModels
+            ]);
+        }else{
+            return response()->json([
+                'status' => 404,
+                'data' => 'Data Not Found'
+            ]);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -71,7 +88,7 @@ class ModelController extends Controller
         }
     }
 
-   
+
 
     /**
      * Show the form for editing the specified resource.

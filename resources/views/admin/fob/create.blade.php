@@ -1,62 +1,68 @@
-@extends('admin.layout.app')
-@section('content')
-    {{-- {{$categories.id}} --}}
 
-    <section class="content-header">
-        <div class="container-fluid my-2">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Create fob</h1>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="{{ route('admin.fob.index') }}" class="btn btn-primary">Back</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
+@extends('admin.layout.app')
+
+@section('title','Fob - Create')
+
+@section('content')
+
+<section class="section">
+    <div class="section-body">
         <form id='subcategoryForm'>
             @csrf
-            <!-- Default box -->
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="min">Min</label>
-                                    <input type="number" name="min" id="min" class="form-control"
-                                        placeholder="min">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="max">Max</label>
-                                    <input type="number" name="max" id="max" class="form-control"
-                                        placeholder="max">
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+        <div class="row">
 
 
-                </div>
-                <div class="pb-5 pt-3">
-                    <button id="btn" class="btn btn-primary">Create</button>
-                    <a href="{{ route('admin.fob.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
-                </div>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header d-flex align-items-center justify-content-between py-3 ">
+                <h4>Create FOB</h4>
+                <a href="{{ route('admin.fob.index') }}" class="btn btn-primary">Back</a>
+              </div>
             </div>
-        </form>
-        <!-- /.card -->
-    </section>
-    <!-- /.content -->
+          </div>
+
+
+          <div class="col-12">
+            <div class="card">
+            
+              <div class="card-body">
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Min</label>
+                      <input type="number" name="min" id="min" class="form-control"
+                      placeholder="min" required>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Max</label>
+                      <input type="number" name="max" id="max" class="form-control"
+                      placeholder="max" required>
+                    </div>
+                  </div>
+                  
+
+                </div>
+                <div class="card-footer text-left">
+                  <button id="btn" class="btn btn-primary mr-1" type="submit">Submit</button>
+                </div>
+
+            </div>
+          </div>
+
+
+
+
+        </div>
+        </div>
+      </form>
+  </section>
 @endsection
+
+
 @section('customJs')
     <script>
         $(document).ready(function() {

@@ -15,14 +15,24 @@ class ShippingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+     public function index()
+     {
+        // $shippings = ShippingCharge::all();
+        
+        $shippings = ShippingCharge::select('countries.name', 'shipping_charges.*')
+            ->leftJoin('countries', 'countries.id', 'shipping_charges.country_id')->orderBy('shipping_charges.id', 'asc')->get();
+// dd($shippings);
+        return view('admin.shipping.index', compact('shippings'));
+     }
+ 
+
+
     public function create()
     {
         $countries = Country::get();
-        $shippingCharges = ShippingCharge::select('countries.name', 'shipping_charges.*')
-            ->leftJoin('countries', 'countries.id', 'shipping_charges.country_id')->orderBy('shipping_charges.id', 'asc')->get();
-        $data['shippingCharges'] = $shippingCharges;
-        $data['countries'] = $countries;
-        return view('admin.shipping.create', $data);
+    
+        return view('admin.shipping.create', compact('countries') );
     }
 
     /**

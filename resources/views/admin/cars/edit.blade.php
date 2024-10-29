@@ -1,332 +1,370 @@
 @extends('admin.layout.app')
+
+@section('title', 'Edit - Car')
+
 @section('content')
-    <style>
-        a {
-            cursor: pointer;
-        }
-
-        .flex {
-            gap: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-
-        .colorimage {
-            width: 90px;
-            margin: 2px;
-        }
-
-        .colorimage-row {
-            /* border: .5px solid gray; */
-            border-radius: 5px;
-            padding: 10px 0px !important
-        }
-
-        #product-gallery {
-            margin: 20px 0px !important;
-            margin-bottom: 40px !important;
-            border: 1px solid #afa6a6;
-            border-radius: 10px;
-            padding: 20px;
-        }
-
-        .dropzoneimg {
-            /* margin: 20px 5px!important; */
-            margin-bottom: 21px !important;
-            border: 1px solid #afa6a6;
-            border-radius: 10px;
-            padding: 10px 20px;
-        }
-
-        .dropzoneimg .card-body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0px !important;
-            padding-top: 8px !important;
-        }
-
-        .img-delte-btn {
-            background: #ef020263;
-            padding: 8px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all .2s;
-            cursor: pointer;
-        }
-
-        .img-delte-btn:hover {
-            color: white !important;
-            background-color: #f10017;
-        }
-    </style>
-
-    {{-- {{$categories.id}} --}}
-
-    <section class="content-header">
-        <div class="container-fluid my-2">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Create bodyType</h1>
-                </div>
-                <div class="col-sm-6 text-right">
-                    <a href="{{ route('admin.bodyType.index') }}" class="btn btn-primary">Back</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <form id='subcategoryForm'>
-            @csrf
-            <!-- Default box -->
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label for="name">bodyType</label>
-                                    <select name="body_type" id="category" class="form-control">
-                                        <option value="">Please Select bodyType</option>
-                                        @if ($bodyTypes->isNotEmpty())
-                                            {
-                                            @foreach ($bodyTypes as $bodyType)
-                                                <option {{$car->body_type ==$bodyType->id ? 'selected' : ''  }} value=" {{ $bodyType->id }}"> {{ $bodyType->name }}</option>
-                                            @endforeach
-                                            }
-                                        @endif
-
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="chassis_no">chassis_no</label>
-                                    <input type="text" name="chassis_no" id="chassis_no" class="form-control"
-                                        placeholder="chassis_no" value="{{$car->chassis_no}}">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="model_grade">model_grade</label>
-                                    <input type="text" name="model_grade" id="model_grade" class="form-control"
-                                        placeholder="model_grade" value="{{$car->model_grade}}">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="slug">Slug</label>
-                                    <input readonly type="text" name="slug" id="slug" class="form-control"
-                                        placeholder="Slug" value="{{$car->slug}}">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="engine_type">engine_type</label>
-                                    <input type="text" name="engine_type" id="engine_type" class="form-control"
-                                        placeholder="engine_type"  value="{{$car->engine_type}}">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status">drive</label>
-                                    <select name="drive" id="drive" class="form-control">
-                                        <option  {{ $car->drive == 'RHS' ? 'selected' : '' }} value="RHS">RHS</option>
-                                        <option {{ $car->drive == 'LHS' ? 'selected' : '' }}  value="LHS">LHS</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="transmission">transmission</label>
-                                    <select name="transmission" id="transmission" class="form-control">
-                                        <option {{ $car->transmission == 'automatic' ? 'selected' : '' }} value="automatic">automatic</option>
-                                        <option {{ $car->transmission == 'manual' ? 'selected' : '' }} value="manual">manual</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="condition">condition</label>
-                                    <select name="condition" id="condition" class="form-control">
-                                        <option {{ $car->condition == 'new' ? 'selected' : '' }} value="new">New</option>
-                                        <option {{ $car->condition == 'Used' ? 'selected' : '' }} value="Used">Used</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="color">color</label>
-                                    <input type="text" name="color" id="color" class="form-control"
-                                        placeholder="color"  value="{{$car->color}}">
-                                    <p></p>
-                                </div>
-                            </div>  
-                            {{-- {{$car->year}} --}}
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="year">Year / Month</label>
-                                    <input type="date" name="year" id="year" class="form-control"
-                                        placeholder="Year / Month"  value="{{$car->year_month}}">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="doors">doors</label>
-                                    <input type="number" name="doors" id="doors" class="form-control"
-                                        placeholder="doors"  value="{{$car->doors}}">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="seats">seats</label>
-                                    <input type="number" name="seats" id="seats" class="form-control"
-                                        placeholder="seats"  value="{{$car->seats}}">
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="m3">m3</label>
-                                    <input type="number" name="m3" id="m3" class="form-control"
-                                        placeholder="m3" step="0.01" value="{{$car->m3}}" >
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="fob_price">fob_price</label>
-                                    <input type="number" name="fob_price" id="fob_price" class="form-control"
-                                        placeholder="fob_price" step="0.01"  value="{{$car->fob_price}}">
-                                    <p></p>
-                                </div>
-                            </div>
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
 
 
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="show_cnf_price">show_cnf_price</label>
-                                    <select name="show_cnf_price" id="show_cnf_price" class="form-control">
-                                        <option {{ $car->show_cnf_price == 1 ? 'selected' : '' }} value="1">True</option>
-                                        <option  {{ $car->show_cnf_price == 0 ? 'selected' : '' }} value="0">False</option>
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="fuel">fuel</label>
-                                    <input type="text" name="fuel" id="fuel" class="form-control"
-                                        placeholder="fuel"  value="{{$car->fuel}}">
-                                    <p></p>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="mileage">mileage</label>
-                                    <input type="number" name="mileage" id="mileage" class="form-control"
-                                        placeholder="mileage" step="0.01" value="{{$car->mileage}}">
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="cc">cc</label>
-                                    <input type="number" name="cc" id="cc" class="form-control"
-                                        placeholder="cc" step="0.01" value="{{$car->cc}}">
-                                    <p></p>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="name">Status</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option  {{ $car->status == 1 ? 'selected' : '' }} value="1">Active</option>
-                                        <option  {{ $car->status == 0 ? 'selected' : '' }} value="0">Block</option>
-                                    </select>
-                                    <p></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-6">
-                                    <label>Car Image</label>
-                                    <input type="file" type="file" class="form-control"
-                                        accept=".jpg, .png, image/jpeg, image/png" multiple id="images"
-                                        name="images[]">
-                                </div>
-
-                            </div>
-                            <div class="col-12">
-                                <div class="row gx-2 gy-2" id="product-gallery">
-                                    @foreach ($car->carImages as $img)
-                                    <div class="col-lg-3 col-md-4 col-sm-6" id="image-row-{{ $img->id }}">
-                                        <div class="dropzoneimg p-2">
-                                            <img src="{{ asset('/images/car/' . $img->image) }}"
-                                                class="card-img-top product_image" alt="...">
-
-                                            <input readonly type="text" hidden name="[]"
-                                                value="{{ $img->id }}">
-                                            <a onclick="deleteOldImage({{ $img->id }})"
-                                                class="img-delte-btn">Delete</a>
-                                        </div>
-                                    </div>
-                                    @endforeach
-
-                                </div>
-                            </div>
-
-                            {{-- <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status">Show On Home</label>
-                                    <select name="showOnHome" id="status" class="form-control" id="">
-                                        <option value="Yes">Yes</option>
-                                        <option selected value="No">No</option>
-                                    </select>
-                                </div>
-                            </div> --}}
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between py-3 ">
+                            <h4>Edit Car</h4>
+                            <a href="{{ route('admin.bodyType.index') }}" class="btn btn-primary">Back</a>
                         </div>
                     </div>
+                </div>
 
 
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <form id='subcategoryForm'>
+                                @csrf
+                                <div class="row">
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Make</label>
+                                            <select onchange="callToModel(this.value)" name="make_id" id="make_id"
+                                                class="form-control" required>
+                                                <option disabled selected>Select Make</option>
+                                                @foreach ($makes as $make)
+                                                    <option {{ $make->id == $car->make_id ? 'selected' : '' }}
+                                                        value="{{ $make->id }}">{{ $make->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Model</label>
+                                            <select name="model_id" id="model_id" class="form-control" required>
+                                                <option selected disabled>Select Model</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Model Grade</label>
+                                            <input type="text" name="model_grade" id="model_grade"
+                                                value="{{ $car->model_grade }}" class="form-control"
+                                                placeholder="model_grade">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Year / Month</label>
+                                            <input type="month" name="year_month" id="year" class="form-control"
+                                                placeholder="Year / Month" value="{{ $car->year_month }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>FOB Price</label>
+                                            <input type="number" name="fob_price" id="fob_price" class="form-control"
+                                                placeholder="fob_price" value="{{ $car->fob_price }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Chassis No (Optional)</label>
+                                            <input type="text" value="{{ $car->chassis_no }}" name="chassis_no"
+                                                id="chassis_no" class="form-control" placeholder="Chassis no">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Slug</label>
+                                            <input readonly type="text" name="slug" id="slug"
+                                                class="form-control" placeholder="Slug" value="{{ $car->slug }}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Engine Type</label>
+                                            <input type="text" name="engine_type" value="{{ $car->engine_type }}"
+                                                id="engine_type" class="form-control" placeholder="engine_type">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>color</label>
+                                            <input type="text" name="color" id="color" class="form-control"
+                                                placeholder="color" value="{{ $car->color }}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Doors</label>
+                                            <input type="number" name="doors" value="{{ $car->doors }}" id="doors"
+                                                class="form-control" placeholder="doors">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Seats</label>
+                                            <input type="number" name="seats" id="seats" class="form-control"
+                                                placeholder="seats" value="{{ $car->seats }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>M3</label>
+                                            <input type="number" value="{{ $car->m3 }}" name="m3"
+                                                id="m3" class="form-control" placeholder="m3">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Fuel</label>
+                                            <input type="text" name="fuel" value="{{ $car->fuel }}"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Mileage</label>
+                                            <input type="number" name="mileage" id="mileage" class="form-control"
+                                                placeholder="mileage" value="{{ $car->mileage }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>cc</label>
+                                            <input type="number" name="cc" class="form-control"
+                                                value="{{ $car->cc }}">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Youtube Link</label>
+                                            <input type="text" name="yt_link" class="form-control"
+                                                value="{{ $car->yt_link }}" placeholder="yt_link...">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Body Type</label>
+                                            <select name="body_type" id="category" class="form-control">
+                                                <option value="">Please Select bodyType</option>
+                                                @if ($bodyTypes->isNotEmpty())
+                                                    {
+                                                    @foreach ($bodyTypes as $bodyType)
+                                                        <option {{ $car->body_type == $bodyType->id ? 'selected' : '' }}
+                                                            value="{{ $bodyType->id }}"> {{ $bodyType->name }}</option>
+                                                    @endforeach
+                                                    }
+                                                @endif
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Drive</label>
+                                            <select name="drive" id="drive" class="form-control">
+                                                <option {{ $car->drive == 'RHS' ? 'selected' : '' }} value="RHS">RHS
+                                                </option>
+                                                <option {{ $car->drive == 'LHS' ? 'selected' : '' }} value="LHS">LHS
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>wheels</label>
+                                            <select name="wheels" id="wheels" class="form-control" required>
+                                                <option value="2" {{ $car->wheels == 2 ? 'selected' : '' }}>2
+                                                </option>
+                                                <option value="4" {{ $car->wheels == 4 ? 'selected' : '' }}>4
+                                                </option>
+                                                <option value="6" {{ $car->wheels == 6 ? 'selected' : '' }}>6
+                                                </option>
+                                                <option value="8" {{ $car->wheels == 8 ? 'selected' : '' }}>8
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Transmission</label>
+                                            <select name="transmission" id="transmission" class="form-control" required>
+                                                <!-- Loop through all transmissions fetched from the database -->
+                                                @foreach ($transmissions as $transmission)
+                                                    <option value="{{ $transmission->name }}"
+                                                        @if ($car->transmission == $transmission->name) selected @endif>
+                                                        {{ $transmission->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Condition</label>
+                                            <select name="condition" id="condition" class="form-control">
+                                                <option {{ $car->condition == 'new' ? 'selected' : '' }} value="new">
+                                                    New</option>
+                                                <option {{ $car->condition == 'Used' ? 'selected' : '' }} value="Used">
+                                                    Used</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Show CNF Price</label>
+                                            <select name="show_cnf_price" id="show_cnf_price" class="form-control">
+                                                <option {{ $car->show_cnf_price == 1 ? 'selected' : '' }} value="1">
+                                                    True</option>
+                                                <option {{ $car->show_cnf_price == 0 ? 'selected' : '' }} value="0">
+                                                    False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Show Chassis No </label>
+                                            <select name="showChassis" id="showChassis" class="form-control" required>
+                                                <option {{ $car->showChassis == 1 ? 'selected' : '' }} value="1">True
+                                                </option>
+                                                <option {{ $car->showChassis == 0 ? 'selected' : '' }} value="0">
+                                                    False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Negotiation</label>
+                                            <select name="negotiation" id="negotiation" class="form-control">
+                                                <option {{ $car->negotiation == 1 ? 'selected' : '' }} value="1">True
+                                                </option>
+                                                <option {{ $car->negotiation == 0 ? 'selected' : '' }} value="0">
+                                                    False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Featured</label>
+                                            <select name="featured" id="featured" class="form-control">
+                                                <option {{ $car->featured == 1 ? 'selected' : '' }} value="1">True
+                                                </option>
+                                                <option {{ $car->featured == 0 ? 'selected' : '' }} value="0">False
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select name="status" id="status" class="form-control">
+                                                <option {{ $car->status == 1 ? 'selected' : '' }} value="1">Active
+                                                </option>
+                                                <option {{ $car->status == 0 ? 'selected' : '' }} value="0">Block
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="section-title">Car Image</div>
+                                            <div class="custom-file">
+                                                <input type="file" type="file" class="form-control"
+                                                    accept=".jpg, .png, image/jpeg, image/png" multiple id="images"
+                                                    name="images[]">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <div class="row gx-2 gy-2" id="product-gallery">
+                                            @foreach ($car->carImages as $img)
+                                                <div class="col-lg-3 col-md-4 col-sm-6"
+                                                    id="image-row-{{ $img->id }}">
+                                                    <div class="dropzoneimg p-2">
+                                                        <img src="{{ asset('/images/car/' . $img->image) }}"
+                                                            class="card-img-top product_image" alt="...">
+
+                                                        <input readonly type="text" hidden name="[]"
+                                                            value="{{ $img->id }}">
+                                                        <a onclick="deleteOldImage({{ $img->id }})"
+                                                            class="img-delte-btn">Delete</a>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer text-left">
+                                    <button id="btn" class="btn btn-primary mr-1" type="Update">Submit</button>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="pb-5 pt-3">
-                    <button id="btn" class="btn btn-primary">Update</button>
-                    <a href="{{ route('admin.bodyType.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
-                </div>
+
+
+
+
             </div>
-        </form>
-        <!-- /.card -->
+        </div>
     </section>
-    <!-- /.content -->
 @endsection
 @section('customJs')
     <script>
@@ -338,7 +376,7 @@
                 let slug = document.getElementById('slug').value;
                 e.preventDefault();
                 $.ajax({
-                    url: "{{ route('admin.cars.update',$car->id) }}",
+                    url: "{{ route('admin.cars.update', $car->id) }}",
                     type: 'PUT',
                     data: data,
                     success: function(response) {
@@ -347,7 +385,7 @@
                             window.location.href = " {{ route('admin.cars.index') }}"
                         } else {
                             let errors = response.errors
-                         
+
                             if (errors['body_type']) {
                                 $('#category').addClass('is-invalid').next('p').addClass(
                                     'invalid-feedback').html(errors['body_type']);
@@ -471,6 +509,7 @@
         function deleteImae(id) {
             $('#image-row-' + id).remove();
         }
+
         function deleteOldImage(id) {
             $.ajax({
                 url: "{{ route('admin.delete_item_image') }}",
@@ -488,6 +527,49 @@
                     }
                 }
             })
+        }
+
+        var make_id = {{ $car->make_id }}
+        callToModel(make_id)
+
+        function callToModel(id) {
+
+            let modelSelect = document.getElementById('model_id');
+            $.ajax({
+                url: '{{ route('admin.fetchModels') }}',
+                method: 'POST',
+                data: {
+                    id: id
+                }, // Pass id as an object
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.status !== 404 && response.data.length > 0) {
+                        modelSelect.innerHTML = ''; // Clear existing options
+
+                        response.data.forEach(value => {
+                            let selected = ''
+                            if (value.id == make_id) {
+                                selected = 'selected'
+                            }
+
+                            modelSelect.innerHTML += `
+                                <option ${selected} value="${value.id}">${value.name}</option>
+                            `;
+                        });
+                    } else {
+                        modelSelect.innerHTML = `
+                            <option selected disabled>No Model Available</option>
+                        `;
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error(xhr.responseText);
+                }
+            });
         }
     </script>
 @endsection

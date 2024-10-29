@@ -1,127 +1,103 @@
+
+
 @extends('admin.layout.app')
 
-@section('title', 'Edit make')
+@section('title','Make - Edit')
 
 @section('content')
-<style>
-    a {
-        cursor: pointer;
-    }
+<section class="section">
+    <div class="section-body">
+        <form action="{{ route('admin.make.update', $make->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="row">
 
-    .flex {
-        gap: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
-
-    .colorimage {
-        width: 90px;
-        margin: 2px;
-    }
-
-    .colorimage-row {
-        /* border: .5px solid gray; */
-        border-radius: 5px;
-        padding: 10px 0px !important
-    }
-
-    #product-gallery {
-        margin: 20px 0px !important;
-        margin-bottom: 40px !important;
-        border: 1px solid #afa6a6;
-        border-radius: 10px;
-        padding: 20px;
-    }
-
-    .dropzoneimg {
-        /* margin: 20px 5px!important; */
-        margin-bottom: 21px !important;
-        border: 1px solid #afa6a6;
-        border-radius: 10px;
-        padding: 10px 20px;
-    }
-
-    .dropzoneimg .card-body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0px !important;
-        padding-top: 8px !important;
-    }
-
-    .img-delte-btn {
-        background: #ef020263;
-        padding: 8px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all .2s;
-        cursor: pointer;
-    }
-
-    .img-delte-btn:hover {
-        color: white !important;
-        background-color: #f10017;
-    }
-</style>
-    <h2>Edit make</h2>
-    <form action="{{ route('admin.make.update', $make->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="mb-3">
-            <label for="name" class="form-label">make Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ $make->name }}"
-                placeholder="Enter make name">
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">make Slug</label>
-            <input type="text" readonly class="form-control" id="slug" value="{{ $make->slug }}" name="slug"
-                placeholder="Enter Slug">
-        </div>
-        <div class="mb-3">
-            <label for="status">status</label>
-            <select name="status" id="status" class="form-control" id="">
-                <option value="1" {{ $make->status == 1 ? 'selected' : '' }}>Active</option>
-                <option value="0" {{ $make->status == 0 ? 'selected' : '' }}>Blocked</option>
-            </select>
-        </div>
-        <div class="row">
-            <div class="form-group col-6">
-                <label>Car Image</label>
-                <input type="file" type="file" class="form-control" accept=".jpg, .png, image/jpeg, image/png"
-                    multiple id="images" name="images[]">
-
-
-
-            </div>
-
-        </div>
-
-        <div class="col-12">
-            <div class="row gx-2 gy-2" id="product-gallery">
-                @foreach ($make->makeImages as $img)
-                <div class="col-lg-3 col-md-4 col-sm-6" id="image-row-{{ $img->id }}">
-                    <div class="dropzoneimg p-2">
-                        <img src="{{ asset('/images/make/' . $img->image) }}"
-                            class="card-img-top product_image" alt="...">
-
-                        <input readonly type="text" hidden name="[]"
-                            value="{{ $img->id }}">
-                        <a onclick="deleteOldImage({{ $img->id }})"
-                            class="img-delte-btn">Delete</a>
+                <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center justify-content-between py-3 ">
+                    <h4>Create Make</h4>
+                    <a href="#" class="btn btn-primary">Back</a>
                     </div>
                 </div>
-                @endforeach
+                </div>
+
+
+                <div class="col-12">
+                <div class="card">
+                
+                    <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Make Name</label>
+                            <input type="text" 
+                            value="{{ $make->name }}" class="form-control" id="name" name="name" placeholder="Enter make name" required>
+                        </div>
+                        </div>
+
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Make Slug</label>
+                            <input type="text" readonly  value="{{ $make->slug }}" class="form-control" id="slug" name="slug" placeholder="Enter Slug">
+                        
+                        </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select name="status" id="status" class="form-control" id="" required>
+                                <option value="1" {{ $make->status == 1 ? 'selected' : '' }}>Active</option>
+                                <option value="0" {{ $make->status == 0 ? 'selected' : '' }}>Blocked</option>
+                            </select>
+                        </div>
+                        </div>
+
+                    
+                        
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>Car Image</label>
+                                <input type="file" type="file" class="form-control" accept=".jpg, .png, image/jpeg, image/png"
+                                    multiple id="images" name="images[]" required>
+                            </div>
+                        </div>
+                
+                        <div class="col-12">
+                            <div class="row gx-2 gy-2" id="product-gallery">
+                                @foreach ($make->makeImages as $img)
+                                <div class="col-lg-3 col-md-4 col-sm-6" id="image-row-{{ $img->id }}">
+                                    <div class="dropzoneimg p-2">
+                                        <img src="{{ asset('/images/make/' . $img->image) }}"
+                                            class="card-img-top product_image" alt="...">
+                
+                                        <input readonly type="text" hidden name="[]"
+                                            value="{{ $img->id }}">
+                                        <a onclick="deleteOldImage({{ $img->id }})"
+                                            class="img-delte-btn">Delete</a>
+                                    </div>
+                                </div>
+                                @endforeach
+                
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-left">
+                        <button class="btn btn-primary mr-1" type="submit">Update</button>
+                    </div>
+
+                </div>
+                </div>
+
+
+
 
             </div>
-        </div>
-        
-
-        <button type="submit" id='btn' class="btn btn-primary">Submit</button>
-    </form>
+        </form>
+    </div>
+  </section>
 @endsection
 
 @section('customJs')
@@ -215,25 +191,23 @@
     function deleteImae(id) {
         $('#image-row-' + id).remove();
     }
-    function deleteOldImage(id) {
-        $.ajax({
-            url: "{{ route('admin.delete_item_image') }}",
-            type: 'POST',
-            data: {
-                id: id
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                console.log(response)
-                if (response['status'] == true) {
-                    $('#image-row-' + id).remove();
+        function deleteOldImage(id) {
+            $.ajax({
+                url: "{{ route('admin.delete_item_image') }}",
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log(response)
+                    if (response['status'] == true) {
+                        $('#image-row-' + id).remove();
+                    }
                 }
-            }
-        })
+            })
     }
-</script>
+    </script>
 @endsection
-
-

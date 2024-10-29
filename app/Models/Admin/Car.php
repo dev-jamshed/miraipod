@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Inquiry;
 
 class Car extends Model
 {
@@ -29,10 +30,37 @@ class Car extends Model
         'fuel',
         'mileage',
         'cc',
-        'status'
+        'status',
+        'negotiation',
+        'featured',
+        'make_id',
+        'model_id',
+        'showChassis',
+        'yt_link',
+        'wheels'
     ];
     public function carImages()
     {
         return $this->hasMany(Item_image::class);
     }
+    public function make()
+    {
+        return $this->belongsTo(Make::class, 'make_id');
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(CarsModel::class, 'model_id');
+    }
+    public function type()
+{
+    return $this->belongsTo(Type::class, 'body_type');
+}
+
+    // Define the relationship to the Inquiry model
+    public function inquiries()
+    {
+        return $this->hasMany(Inquiry::class, 'car_id');
+    }
+
 }

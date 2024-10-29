@@ -1,112 +1,89 @@
+
+
+
 @extends('admin.layout.app')
 
-@section('title', 'Create make')
+@section('title','Make - Create')
 
 @section('content')
-    <style>
-        a {
-            cursor: pointer;
-        }
+<section class="section">
+    <div class="section-body">
+        <form action="{{ route('admin.make.store') }}" method="POST">
+            @csrf
+            <div class="row">
 
-        .flex {
-            gap: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
 
-        .colorimage {
-            width: 90px;
-            margin: 2px;
-        }
+                <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center justify-content-between py-3 ">
+                    <h4>Create Make</h4>
+                    <a href="#" class="btn btn-primary">Back</a>
+                    </div>
+                </div>
+                </div>
 
-        .colorimage-row {
-            /* border: .5px solid gray; */
-            border-radius: 5px;
-            padding: 10px 0px !important
-        }
 
-        #product-gallery {
-            margin: 20px 0px !important;
-            margin-bottom: 40px !important;
-            border: 1px solid #afa6a6;
-            border-radius: 10px;
-            padding: 20px;
-        }
+                <div class="col-12">
+                <div class="card">
+                
+                    <div class="card-body">
+                    <div class="row">
 
-        .dropzoneimg {
-            /* margin: 20px 5px!important; */
-            margin-bottom: 21px !important;
-            border: 1px solid #afa6a6;
-            border-radius: 10px;
-            padding: 10px 20px;
-        }
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Make Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter make name" required>
+                        </div>
+                        </div>
 
-        .dropzoneimg .card-body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0px !important;
-            padding-top: 8px !important;
-        }
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Make Slug</label>
+                            <input type="text" readonly class="form-control" id="slug" name="slug" placeholder="Enter Slug">
+                        
+                        </div>
+                        </div>
+                    
+                    
+                        
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select name="status" id="status" class="form-control" id="">
+                                <option value="1">Active</option>
+                                <option value="0">Blocked</option>
+                            </select>
+                        </div>
+                        </div>
 
-        .img-delte-btn {
-            background: #ef020263;
-            padding: 8px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all .2s;
-            cursor: pointer;
-        }
+                    
+                        
+                        <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="section-title">Make Image</div>
+                            <div class="custom-file">
+                                <input type="file" type="file" class="form-control" accept=".jpg, .png, image/jpeg, image/png"
+                                multiple id="images" name="images[]">
+                            <label class="custom-file-label" for="images">Choose Images </label>
+                            </div>
+                        </div>
+                        </div>
 
-        .img-delte-btn:hover {
-            color: white !important;
-            background-color: #f10017;
-        }
-    </style>
-    <h2>Create make</h2>
-    <form action="{{ route('admin.make.store') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label for="name" class="form-label">make Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter make name">
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">make Slug</label>
-            <input type="text" readonly class="form-control" id="slug" name="slug" placeholder="Enter Slug">
-        </div>
-        <div class="row">
-            <div class="form-group col-6">
-                <label>Car Image</label>
-                <input type="file" type="file" class="form-control" accept=".jpg, .png, image/jpeg, image/png"
-                    multiple id="images" name="images[]">
+                    </div>
+                    <div class="card-footer text-left">
+                        <button id="btn" class="btn btn-primary mr-1" type="submit">Submit</button>
+                    </div>
+
+                </div>
+                </div>
+
 
 
 
             </div>
-
-        </div>
-        <div class="col-12">
-            <div class="row gx-2 gy-2" id="product-gallery">
-
-
-            </div>
-        </div>
-
-        {{-- <div class="col-md-12"> --}}
-        <div class="mb-3">
-            <label for="status">status</label>
-            <select name="status" id="status" class="form-control" id="">
-                <option value="1">Active</option>
-                <option value="0">Blocked</option>
-            </select>
-        </div>
-        {{-- </div> --}}
-        <button type="submit" id="btn" class="btn btn-primary">Submit</button>
-    </form>
+        </form>
+    </div>
+  </section>
 @endsection
 
 @section('customJs')
