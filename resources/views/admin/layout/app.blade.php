@@ -364,6 +364,11 @@
                             <a href="{{ route('admin.banners.index') }}" class="nav-link "><i
                                     data-feather="image"></i><span>Auto Part Sliders</span></a>
                         </li>
+                        <li
+                            class="dropdown {{ request()->routeIs('admin.autoparts.editDesc') ? 'active' : '' }}">
+                            <a href="{{ route('admin.autoparts.editDesc') }}" class="nav-link "><i
+                                    data-feather="image"></i><span>Auto Part page descrtoin</span></a>
+                        </li>
                         {{-- <li class="dropdown {{ request()->routeIs('admin.faqs.sliders.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.faqs.sliders.index') }}" class="nav-link "><i
                                     data-feather="sliders"></i><span>Faq Sliders</span></a>
