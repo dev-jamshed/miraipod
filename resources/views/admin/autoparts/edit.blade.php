@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 
-@section('title','Cars - Edit')
+@section('title','Autopart - Edit')
 
 @section('content')
 
@@ -34,31 +34,9 @@
                 
                     <div class="row">
                         
-                        <div class="col-md-6">
+                      <div class="col-lg-6 col-md-6">
                         <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" name="title" class="form-control" value="{{ $data->title }}"
-                            placeholder="Autopart Name..." required>
-                        </div>
-                        </div>
-
-                        <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Short Description</label>
-                            <textarea name="short_description" required class="form-control">{{ $data->short_description }}</textarea>
-                        </div>
-                        </div>
-
-                        <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Long Description</label>
-                            <textarea name="long_description" required class="summernote">{{ $data->long_description }}</textarea>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <div class="section-title">* Image 1 </div>
+                            <div class="section-title">    Image 1 </div>
                             <div class="custom-file">
                                 <input type="file" class="form-control"
                                     accept=".jpg, .png, image/jpeg, image/png" name="img_1">
@@ -67,7 +45,7 @@
                         </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-6 col-md-6">
                         <div class="form-group">
                             <div class="section-title">Image 2</div>
                             <div class="custom-file">
@@ -80,7 +58,7 @@
                         </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-6">
+                        {{-- <div class="col-lg-4 col-md-6">
                         <div class="form-group">
                             <div class="section-title">Image 3 </div>
                             <div class="custom-file">
@@ -91,7 +69,31 @@
                                     @endif
                             </div>
                         </div>
+                        </div> --}}
+
+                        {{-- <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" name="title" class="form-control" value="{{ $data->title }}"
+                            placeholder="Autopart Name..." required>
                         </div>
+                        </div>
+
+                        <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Short Description</label>
+                            <textarea name="short_description" required class="form-control">{{ $data->short_description }}</textarea>
+                        </div>
+                        </div> --}}
+
+                        <div class="col-md-12">
+                        <div class="form-group">
+                            <label> Description</label>
+                            <textarea name="long_description" required class="summernote">{{ $data->long_description }}</textarea>
+                        </div>
+                        </div>
+
+                    
 
                     </div>
                     <div class="card-footer text-left">

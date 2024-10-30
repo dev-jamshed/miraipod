@@ -545,10 +545,31 @@
             
                 @if($companyInfo)
                 <ul>
-                <li><a href="#" style="color: white;"> <i class="fa-regular fa-phone-volume"></i> {{ $companyInfo->phone_1 }}</a></li>
-                <li><a href="#" style="color: white;"> <i class="fa-regular fa-phone-volume"></i> {{ $companyInfo->phone_2 }}</a></li>
-                <li><a href="#" style="color: white;"> <i class="fa-regular fa-envelope"></i> {{ $companyInfo->email_1 }}</a></li>
-                <li><a href="#" style="color: white;"> <i class="fa-regular fa-envelope"></i> {{ $companyInfo->email_2 }}</a></li>
+                    @if($companyInfo->phone_1)
+                    <li><a href="#" style="color: white;"> <i class="fa-regular fa-phone-volume"></i> {{ $companyInfo->phone_1 }}</a></li>
+                @endif
+                @if($companyInfo->phone_2)
+                    <li><a href="#" style="color: white;"> <i class="fa-regular fa-phone-volume"></i> {{ $companyInfo->phone_2 }}</a></li>
+                @endif
+                @if($companyInfo->phone_3)
+                    <li><a href="#" style="color: white;"> <i class="fa-regular fa-phone-volume"></i> {{ $companyInfo->phone_3 }}</a></li>
+                @endif
+                @if($companyInfo->phone_4)
+                    <li><a href="#" style="color: white;"> <i class="fa-regular fa-phone-volume"></i> {{ $companyInfo->phone_4 }}</a></li>
+                @endif
+                @if($companyInfo->email_1)
+                    <li><a href="#" style="color: white;"> <i class="fa-regular fa-envelope"></i> {{ $companyInfo->email_1 }}</a></li>
+                @endif
+                @if($companyInfo->email_2)
+                    <li><a href="#" style="color: white;"> <i class="fa-regular fa-envelope"></i> {{ $companyInfo->email_2 }}</a></li>
+                @endif
+                @if($companyInfo->email_3)
+                    <li><a href="#" style="color: white;"> <i class="fa-regular fa-envelope"></i> {{ $companyInfo->email_3 }}</a></li>
+                @endif
+                @if($companyInfo->email_4)
+                    <li><a href="#" style="color: white;"> <i class="fa-regular fa-envelope"></i> {{ $companyInfo->email_4 }}</a></li>
+                @endif
+                
                 <li><a href="#" style="color: white;"> <i class="fa-regular fa-location-dot"></i> {{ $companyInfo->office_address }}</a></li>
                 @else
                     <li>No company information available.</li>

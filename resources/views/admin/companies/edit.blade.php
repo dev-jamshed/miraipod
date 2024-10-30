@@ -40,6 +40,18 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label>Email 3</label>
+                                        <input type="email" name="email_3" id="email_3" class="form-control" value="{{ $company->email_3 }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email 4</label>
+                                        <input type="email" name="email_4" id="email_4" class="form-control" value="{{ $company->email_4 }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label>Phone 1</label>
                                         <input type="text" name="phone_1" id="phone_1" class="form-control" value="{{ $company->phone_1 }}" required>
                                     </div>
@@ -48,6 +60,18 @@
                                     <div class="form-group">
                                         <label>Phone 2</label>
                                         <input type="text" name="phone_2" id="phone_2" class="form-control" value="{{ $company->phone_2 }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone 3</label>
+                                        <input type="text" name="phone_3" id="phone_3" class="form-control" value="{{ $company->phone_3 }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone 4</label>
+                                        <input type="text" name="phone_4" id="phone_4" class="form-control" value="{{ $company->phone_4 }}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">

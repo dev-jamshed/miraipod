@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Autopart extends Model
 {
     use HasFactory;
+    protected $fillable = ['image1', 'image2', 'description'];
 }

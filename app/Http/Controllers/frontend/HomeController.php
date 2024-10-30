@@ -8,6 +8,7 @@ use App\Models\Admin\Type;
 use App\Models\Admin\Banner;
 use Illuminate\Http\Request;
 // use App\Models\Fob;
+use App\Models\HomepageBanner;
 use App\Models\Admin\CarsModel;
 use App\Models\Admin\ExchangeRate;
 use App\Models\Admin\Transmission;
@@ -16,6 +17,9 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     public function home(){
+
+        $homepageBannersUserCar = HomepageBanner::where('type','used_cars')->get();
+        $homepageBannersFeatured_cars = HomepageBanner::where('type','featured_cars')->get();
         $transmissions = Transmission::all();
         $banner_images = Banner::get();
         $bodyTypes = Type::where('status',1)->get();
@@ -68,9 +72,10 @@ class HomeController extends Controller
         ->orderBy('color', 'asc')
         ->pluck('color');
         
-        // dd($cars)
-;
-        return view('frontend.home',compact('transmissions','banner_images','cars','carMileages','carFobPrices','carCC','carMakes','bodyTypes','carsModels','carYears','carFuels','carColors','newArrivalCars','featuredCars'));
+        // dd()
+;   
+// return $homepageBannersUserCar;
+        return view('frontend.home',compact('transmissions','banner_images','cars','carMileages','carFobPrices','carCC','carMakes','bodyTypes','carsModels','carYears','carFuels','carColors','newArrivalCars','featuredCars' , 'homepageBannersUserCar','homepageBannersFeatured_cars'));
     }
 
 

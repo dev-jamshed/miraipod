@@ -27,18 +27,10 @@ use App\Http\Controllers\frontend\StaticPageController;
 use App\Http\Controllers\Admin\HomepageBannersController;
 use App\Http\Controllers\frontend\Auth\UserLoginController;
 use App\Http\Controllers\Admin\AutopartController as AdminAutopartController;
+use App\Http\Controllers\Admin\faqSliderController;
+use App\Models\faqSlider;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-// web.php
+
 Route::get('/check-auth', function () {
     if (Auth::check()) {
         return response()->json(['authenticated' => true]);
@@ -52,11 +44,6 @@ Route::get('/check-auth', function () {
 
 ///////--  Frontend Section --///////
 
-// Route::get('user/login', [UserLoginController::class, 'showLoginForm'])->name('user.login');
-// Route::post('user/login', [UserLoginController::class, 'login']);
-// Route::post('user/logout', [UserLoginController::class, 'logout'])->name('user.logout');
-// Route::get('user/register', [UserLoginController::class, 'showRegistrationForm'])->name('user.register');
-// Route::post('user/register', [UserLoginController::class, 'register']);
 Route::post('/users/{id}/status', [UserLoginController::class, 'updateStatus'])->name('users.updateStatus');
 
 
@@ -64,6 +51,10 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/about-us', [StaticPageController::class, 'about'])->name('about');
 Route::get('/contact-us', [StaticPageController::class, 'contact'])->name('contact');
 Route::get('/faqs', [StaticPageController::class, 'faq'])->name('faq');
+
+
+
+
 Route::get('/cars', [FilterController::class, 'cars'])->name('filter.cars');
 Route::get('/car/show/{id}', [FilterController::class, 'carShow'])->name('car.show');
 
@@ -133,6 +124,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::get('/destroy/{id}', 'destroy')->name('destroy');
             Route::post('/update/{id}', 'update')->name('update');
             Route::post('/store', 'store')->name('store');
+            
+            Route::get('editDesc', 'editDesc')->name('editDesc');
+            Route::post('/updateDesc/{id}', 'updateDesc')->name('updateDesc');
         });
 
         // Other routes that need admin access
@@ -160,6 +154,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
             Route::post('/uploadBanners', [HomepageBannersController::class, 'uploadBanners'])->name('uploadBanners');
             Route::post('/update-featured-cars', [HomepageBannersController::class, 'updateFeaturedCarsBanner'])->name('updateFeaturedCarsBanner');
         });
+
+        Route::prefix('faqs/sliders')->name('faqs.sliders.')->group(function () {
+            Route::get('/', [faqSliderController::class, 'index'])->name('index');
+            Route::post('/update', [faqSliderController::class, 'update'])->name('update');
+            Route::post('/delete', [faqSliderController::class, 'destroy'])->name('delete');
+        });
+        
     });
 
     // Routes accessible to all authenticated users

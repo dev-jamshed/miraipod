@@ -24,8 +24,12 @@ class DetailController extends Controller
         $request->validate([
             'email_1' => 'nullable|email',
             'email_2' => 'nullable|email',
+            'email_3' => 'nullable|email',
+            'email_4' => 'nullable|email',
             'phone_1' => 'nullable|string',
             'phone_2' => 'nullable|string',
+            'phone_3' => 'nullable|string',
+            'phone_4' => 'nullable|string',
             'office_address' => 'nullable|string',
         ]);
 

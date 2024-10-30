@@ -1,12 +1,12 @@
 @extends('admin.layout.app')
 
-@section('title','Banners')
+@section('title','Faq Sliders ')
 
 @section('content')
 
     <section class="section">
       <div class="section-body">
-        <form class="needs-validation" action="{{ route('admin.banners.updateBanner') }}" method="post"
+        <form class="needs-validation" action="{{ route('admin.faqs.sliders.update') }}" method="post"
             novalidate="" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -15,7 +15,7 @@
                 <div class="col-12">
                     <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between py-3 ">
-                        <h4>Create Banner</h4>
+                        <h4>Faq Sliders </h4>
                         {{-- <a href="#" class="btn btn-primary">Back</a> --}}
                     </div>
                     </div>
@@ -30,7 +30,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                            <div class="section-title">Car Image</div>
+                            <div class="section-title">Slider Image</div>
                             <div class="custom-file">
                                 <input type="file" type="file" class="custom-file-input"
                                 accept=".jpg, .png, image/jpeg, image/png" multiple id="images"
@@ -47,7 +47,7 @@
                                 @foreach ($banner_images as $img)
                                     <div class="col-lg-3 col-md-4 col-sm-6" id="image-row-{{ $img->id }}">
                                         <div class="dropzoneimg p-2">
-                                            <img src="{{ asset('/images/banner/' . $img->image) }}"
+                                            <img src="{{ asset('/images/faq_slider/' . $img->image) }}"
                                                 class="card-img-top product_image" alt="...">
 
                                             <input readonly type="text" hidden name="[]"
@@ -140,7 +140,7 @@
 
     function deleteOldImage(id) {
             $.ajax({
-                url: "{{ route('admin.banners.delete') }}",
+                url: "{{ route('admin.faqs.sliders.delete') }}",
                 type: 'POST',
                 data: {
                     id: id
@@ -158,3 +158,4 @@
         }
 </script>
 @endsection
+

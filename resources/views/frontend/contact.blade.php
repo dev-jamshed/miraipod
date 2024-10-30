@@ -36,34 +36,77 @@ $companyInfo = \App\Helpers\getCompanyInfo();
     Have questions or need assistance? Reach out to us, and let us help you find the perfect car from Japan’s top auctions!
 </p>
 
-                <div class="info">
-                    <div class="information">
-                        <i class="fas fa-map-marker-alt"></i> &nbsp &nbsp
+<div class="info">
+    <div class="information">
+        <i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp;
+        <p>{{ $companyInfo->office_address }}</p>
+    </div>
+    
+    @if(!empty($companyInfo->email_1))
+        <div class="information">
+            <i class="fas fa-envelope"></i> &nbsp;&nbsp;
+            <div>
+                <p>{{ $companyInfo->email_1 }}</p>
+            </div>
+        </div>
+    @endif
 
-                        <p>{{ $companyInfo->office_address }}</p>
-                    </div>
-                    <div class="information">
-                        <i class="fas fa-envelope"></i> &nbsp &nbsp
-                        <div>
-                            <p>{{ $companyInfo->email_1 }}</p>
-                        </div>
-                    </div>
-                    <div class="information">
-                        <i class="fas fa-envelope"></i> &nbsp &nbsp
-                        <div>
-                            <p>{{ $companyInfo->email_2 }}</p>
-                        </div>
-                    </div>
-                    
-                    <div class="information">
-                        <i class="fas fa-phone"></i>&nbsp&nbsp
-                        <p>{{$companyInfo->phone_1}}</p>
-                    </div>
-                    <div class="information">
-                        <i class="fas fa-phone"></i>&nbsp&nbsp
-                        <p>{{$companyInfo->phone_2}}</p>
-                    </div>
-                </div>
+    @if(!empty($companyInfo->email_2))
+        <div class="information">
+            <i class="fas fa-envelope"></i> &nbsp;&nbsp;
+            <div>
+                <p>{{ $companyInfo->email_2 }}</p>
+            </div>
+        </div>
+    @endif
+
+    @if(!empty($companyInfo->email_3))
+        <div class="information">
+            <i class="fas fa-envelope"></i> &nbsp;&nbsp;
+            <div>
+                <p>{{ $companyInfo->email_3 }}</p>
+            </div>
+        </div>
+    @endif
+
+    @if(!empty($companyInfo->email_4))
+        <div class="information">
+            <i class="fas fa-envelope"></i> &nbsp;&nbsp;
+            <div>
+                <p>{{ $companyInfo->email_4 }}</p>
+            </div>
+        </div>
+    @endif
+
+    @if(!empty($companyInfo->phone_1))
+        <div class="information">
+            <i class="fas fa-phone"></i>&nbsp;&nbsp;
+            <p>{{ $companyInfo->phone_1 }}</p>
+        </div>
+    @endif
+
+    @if(!empty($companyInfo->phone_2))
+        <div class="information">
+            <i class="fas fa-phone"></i>&nbsp;&nbsp;
+            <p>{{ $companyInfo->phone_2 }}</p>
+        </div>
+    @endif
+
+    @if(!empty($companyInfo->phone_3))
+        <div class="information">
+            <i class="fas fa-phone"></i>&nbsp;&nbsp;
+            <p>{{ $companyInfo->phone_3 }}</p>
+        </div>
+    @endif
+
+    @if(!empty($companyInfo->phone_4))
+        <div class="information">
+            <i class="fas fa-phone"></i>&nbsp;&nbsp;
+            <p>{{ $companyInfo->phone_4 }}</p>
+        </div>
+    @endif
+</div>
+
 
                 <div class="social-media">
                     <p>Connect with us :</p>

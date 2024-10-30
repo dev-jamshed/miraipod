@@ -23,37 +23,40 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped" id="table-1">
+                                <table class="table table-striped table-bordered" id="table-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">
-                                              #
-                                            </th>
-
-                                            <th>Title</th>
-                                            <th>Short Description</th>
-                                            <th>Long Description</th>
-                                            <th>Img</th>
-                                            <th class="text-center">Actions</th>
+                                            <th class="text-center" style="width: 5%;">#</th>
+                                            {{-- <th>Title</th> --}}
+                                            {{-- <th>Short Description</th> --}}
+                                            <th style="width: 40%;">Description</th>
+                                            <th style="width: 20%;">Image</th>
+                                            <th class="text-center" style="width: 15%;">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $index => $item)
-                                        <tr >
-                                            <td  class="text-center">{{ $index+1 }}</td>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{{ $item->short_description }}</td>
-                                            <td>{!! $item->long_description !!}</td>
-                                            <td> <img width="200px" class="img-fluid" src="{{ asset($item->img_1) }}" alt=""> </td>
-                                           
-                                            <td class="action-btns">
-                                                <a href="{{ route('admin.autoparts.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                                                <a href="{{ route('admin.autoparts.destroy', $item->id) }}" class="btn btn-danger">Delete</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-
+                                            <tr>
+                                                <td class="text-center">{{ $index + 1 }}</td>
+                                                {{-- <td>{{ $item->title }}</td> --}}
+                                                {{-- <td>{{ $item->short_description }}</td> --}}
+                                                <td>
+                                                    <p>{{ Str::limit(strip_tags($item->long_description), 450) }}</p>
+                                                </td>
+                                                
+                                                <td class="text-center">
+                                                    <img src="{{ asset($item->img_1) }}" alt="Image" class="img-thumbnail" style="max-width: 150px;">
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="{{ route('admin.autoparts.edit', $item->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
+                                                    <a href="{{ route('admin.autoparts.destroy', $item->id) }}" class="btn btn-danger btn-sm" 
+                                                       onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
+                                </table>
+                                
                                 </table>
                             </div>
                         </div>

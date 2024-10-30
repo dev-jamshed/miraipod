@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 
-@section('title','Cars - Create')
+@section('title','autopart - Create')
 
 @section('content')
 
@@ -34,8 +34,39 @@
                 <form action="{{route('admin.autoparts.store')}}" method="POST" enctype="multipart/form-data" >
                     @csrf
                     <div class="row">
+
+
+                      <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <div class="section-title"> Image 1 </div>
+                            <div class="custom-file">
+                                <input type="file" class="form-control"
+                                    accept=".jpg, .png, image/jpeg, image/png" name="img_1" required>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                        <div class="form-group">
+                            <div class="section-title">Image 2</div>
+                            <div class="custom-file">
+                                <input type="file" class="form-control"
+                                    accept=".jpg, .png, image/jpeg, image/png" name="img_2" >
+                            </div>
+                        </div>
+                        </div>
+{{-- 
+                        <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <div class="section-title">Image 3 </div>
+                            <div class="custom-file">
+                                <input type="file" class="form-control"
+                                    accept=".jpg, .png, image/jpeg, image/png" name="img_3" >
+                            </div>
+                        </div>
+                        </div> --}}
                         
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                         <div class="form-group">
                             <label>Title</label>
                             <input type="text" name="title" class="form-control"
@@ -48,45 +79,17 @@
                             <label>Short Description</label>
                             <textarea name="short_description" required class="form-control" ></textarea>
                         </div>
-                        </div>
+                        </div> --}}
 
                         <div class="col-md-12">
                         <div class="form-group">
-                            <label>Long Description</label>
+                            <label>Description</label>
                             <textarea name="long_description" required class="summernote"></textarea>
                         </div>
                         </div>
 
                         
-                        <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <div class="section-title">* Image 1 </div>
-                            <div class="custom-file">
-                                <input type="file" class="form-control"
-                                    accept=".jpg, .png, image/jpeg, image/png" name="img_1" required>
-                            </div>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <div class="section-title">Image 2</div>
-                            <div class="custom-file">
-                                <input type="file" class="form-control"
-                                    accept=".jpg, .png, image/jpeg, image/png" name="img_2" >
-                            </div>
-                        </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <div class="section-title">Image 3 </div>
-                            <div class="custom-file">
-                                <input type="file" class="form-control"
-                                    accept=".jpg, .png, image/jpeg, image/png" name="img_3" >
-                            </div>
-                        </div>
-                        </div>
+                    
 
 
 

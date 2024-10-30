@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::DwQtObRM7EjwsQMZ',
+            '_route' => 'generated::eHvslDUqFrVS3Vxv',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::u8HkzK4cMH7eCskj',
+            '_route' => 'generated::fxO1pl9pb5WYLQxr',
           ),
           1 => NULL,
           2 => 
@@ -1143,6 +1143,26 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/admin/autoparts/editDesc' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.autoparts.editDesc',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/admin/contact-us' => 
       array (
         0 => 
@@ -1338,6 +1358,64 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/admin/faqs/sliders' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.faqs.sliders.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin/faqs/sliders/update' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.faqs.sliders.update',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin/faqs/sliders/delete' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.faqs.sliders.delete',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/generateSlug' => 
       array (
         0 => 
@@ -1381,7 +1459,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Dx5is12EZH6eVC0F',
+            '_route' => 'generated::ZOhbQ3h5ER4ph12o',
           ),
           1 => NULL,
           2 => 
@@ -1417,7 +1495,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::rSfLidxM7F1kazfK',
+            '_route' => 'generated::DhQJNbSIQ0Gdk4E3',
           ),
           1 => NULL,
           2 => 
@@ -1547,7 +1625,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::B9c6XBqR9G7fPVXg',
+            '_route' => 'generated::0yG26GLNR9uNTOI9',
           ),
           1 => NULL,
           2 => 
@@ -1601,7 +1679,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/users/([^/]++)/status(*:29)|/car/show/([^/]++)(*:54)|/a(?|utoparts/show/([^/]++)(*:88)|dmin/(?|inquiries/([^/]++)(*:121)|m(?|odel/([^/]++)(?|/edit(*:154)|(*:162))|ake/([^/]++)(?|/edit(*:191)|(*:199)))|shipping/([^/]++)(?|/edit(*:234)|(*:242))|bodyType/([^/]++)(?|(*:271)|/edit(*:284)|(*:292))|transmission/([^/]++)(?|/edit(*:330)|(*:338))|c(?|o(?|mpanies/([^/]++)(?|/edit(*:379)|(*:387))|ntact\\-us/(?|detail/([^/]++)(*:424)|edit/([^/]++)(*:445)|update/([^/]++)(*:468)))|ars/([^/]++)(?|/edit(*:498)|(*:506)))|fob/([^/]++)(?|/edit(*:536)|(*:544))|exchange_rates/([^/]++)(?|/edit(*:584)|(*:592))|a(?|utoparts/(?|de(?|tail/([^/]++)(*:635)|stroy/([^/]++)(*:657))|edit/([^/]++)(*:679)|update/([^/]++)(*:702))|bout\\-us/(?|detail/([^/]++)(*:738)|edit/([^/]++)(*:759)|update/([^/]++)(*:782)))))|/inquiry/([^/]++)/reply(*:817)|/reset\\-password/([^/]++)(*:850)|/verify\\-email/([^/]++)/([^/]++)(*:890))/?$}sDu',
+      0 => '{^(?|/users/([^/]++)/status(*:29)|/car/show/([^/]++)(*:54)|/a(?|utoparts/show/([^/]++)(*:88)|dmin/(?|inquiries/([^/]++)(*:121)|m(?|odel/([^/]++)(?|/edit(*:154)|(*:162))|ake/([^/]++)(?|/edit(*:191)|(*:199)))|shipping/([^/]++)(?|/edit(*:234)|(*:242))|bodyType/([^/]++)(?|(*:271)|/edit(*:284)|(*:292))|transmission/([^/]++)(?|/edit(*:330)|(*:338))|c(?|o(?|mpanies/([^/]++)(?|/edit(*:379)|(*:387))|ntact\\-us/(?|detail/([^/]++)(*:424)|edit/([^/]++)(*:445)|update/([^/]++)(*:468)))|ars/([^/]++)(?|/edit(*:498)|(*:506)))|fob/([^/]++)(?|/edit(*:536)|(*:544))|exchange_rates/([^/]++)(?|/edit(*:584)|(*:592))|a(?|utoparts/(?|de(?|tail/([^/]++)(*:635)|stroy/([^/]++)(*:657))|edit/([^/]++)(*:679)|update(?|/([^/]++)(*:705)|Desc/([^/]++)(*:726)))|bout\\-us/(?|detail/([^/]++)(*:763)|edit/([^/]++)(*:784)|update/([^/]++)(*:807)))))|/inquiry/([^/]++)/reply(*:842)|/reset\\-password/([^/]++)(*:875)|/verify\\-email/([^/]++)/([^/]++)(*:915))/?$}sDu',
     ),
     3 => 
     array (
@@ -2421,7 +2499,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      702 => 
+      705 => 
       array (
         0 => 
         array (
@@ -2443,7 +2521,29 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      738 => 
+      726 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.autoparts.updateDesc',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      763 => 
       array (
         0 => 
         array (
@@ -2466,7 +2566,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      759 => 
+      784 => 
       array (
         0 => 
         array (
@@ -2489,7 +2589,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      782 => 
+      807 => 
       array (
         0 => 
         array (
@@ -2511,7 +2611,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      817 => 
+      842 => 
       array (
         0 => 
         array (
@@ -2533,7 +2633,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      850 => 
+      875 => 
       array (
         0 => 
         array (
@@ -2556,7 +2656,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      890 => 
+      915 => 
       array (
         0 => 
         array (
@@ -2741,7 +2841,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::DwQtObRM7EjwsQMZ' => 
+    'generated::eHvslDUqFrVS3Vxv' => 
     array (
       'methods' => 
       array (
@@ -2764,7 +2864,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::DwQtObRM7EjwsQMZ',
+        'as' => 'generated::eHvslDUqFrVS3Vxv',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2780,7 +2880,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::u8HkzK4cMH7eCskj' => 
+    'generated::fxO1pl9pb5WYLQxr' => 
     array (
       'methods' => 
       array (
@@ -2806,7 +2906,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::u8HkzK4cMH7eCskj',
+        'as' => 'generated::fxO1pl9pb5WYLQxr',
       ),
       'fallback' => false,
       'defaults' => 
@@ -6221,6 +6321,83 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'admin.autoparts.editDesc' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'admin/autoparts/editDesc',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AutopartController@editDesc',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AutopartController@editDesc',
+        'as' => 'admin.autoparts.editDesc',
+        'namespace' => NULL,
+        'prefix' => 'admin/autoparts',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.autoparts.updateDesc' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'admin/autoparts/updateDesc/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AutopartController@updateDesc',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AutopartController@updateDesc',
+        'as' => 'admin.autoparts.updateDesc',
+        'namespace' => NULL,
+        'prefix' => 'admin/autoparts',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'admin.contactus.index' => 
     array (
       'methods' => 
@@ -6838,6 +7015,121 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'admin.faqs.sliders.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'admin/faqs/sliders',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\faqSliderController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\faqSliderController@index',
+        'as' => 'admin.faqs.sliders.index',
+        'namespace' => NULL,
+        'prefix' => 'admin/faqs/sliders',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.faqs.sliders.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'admin/faqs/sliders/update',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\faqSliderController@update',
+        'controller' => 'App\\Http\\Controllers\\Admin\\faqSliderController@update',
+        'as' => 'admin.faqs.sliders.update',
+        'namespace' => NULL,
+        'prefix' => 'admin/faqs/sliders',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.faqs.sliders.delete' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'admin/faqs/sliders/delete',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\faqSliderController@destroy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\faqSliderController@destroy',
+        'as' => 'admin.faqs.sliders.delete',
+        'namespace' => NULL,
+        'prefix' => 'admin/faqs/sliders',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'generateSlug' => 
     array (
       'methods' => 
@@ -6923,7 +7215,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Dx5is12EZH6eVC0F' => 
+    'generated::ZOhbQ3h5ER4ph12o' => 
     array (
       'methods' => 
       array (
@@ -6944,7 +7236,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Dx5is12EZH6eVC0F',
+        'as' => 'generated::ZOhbQ3h5ER4ph12o',
       ),
       'fallback' => false,
       'defaults' => 
@@ -6998,7 +7290,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::rSfLidxM7F1kazfK' => 
+    'generated::DhQJNbSIQ0Gdk4E3' => 
     array (
       'methods' => 
       array (
@@ -7019,7 +7311,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::rSfLidxM7F1kazfK',
+        'as' => 'generated::DhQJNbSIQ0Gdk4E3',
       ),
       'fallback' => false,
       'defaults' => 
@@ -7339,7 +7631,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::B9c6XBqR9G7fPVXg' => 
+    'generated::0yG26GLNR9uNTOI9' => 
     array (
       'methods' => 
       array (
@@ -7360,7 +7652,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::B9c6XBqR9G7fPVXg',
+        'as' => 'generated::0yG26GLNR9uNTOI9',
       ),
       'fallback' => false,
       'defaults' => 

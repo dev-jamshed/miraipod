@@ -251,7 +251,7 @@ class FilterController extends Controller
 
     public function search(request $req){
         $query = Car::with(['make', 'model','carImages'])->where('status',1);
-
+        $transmissions = Transmission::all();
         if($req->has('search')){
             $searchTerm = $req->search;
     
@@ -308,7 +308,7 @@ class FilterController extends Controller
         ->orderBy('color', 'asc')
         ->pluck('color');
 
-        return view('frontend.filter_cars',compact('cars','carMileages','carFobPrices','carCC','carMakes','bodyTypes','carsModels','carYears','carFuels','carColors','searchTerm'));
+        return view('frontend.filter_cars',compact('cars','carMileages','carFobPrices','carCC','carMakes','bodyTypes','carsModels','carYears','carFuels','carColors','searchTerm' ,'transmissions'));
         // dd($cars);
 
         // if($cars){

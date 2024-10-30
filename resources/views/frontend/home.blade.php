@@ -255,7 +255,9 @@ $currentCurrencyId = session('currencyId', '0');
         <div class="row gy-5 ">
             <div class="col-md-3">
                 <div class="side-banner">
-                    <img src="{{asset('frontend')}}/images/side-banner.png" alt="">
+                    @foreach($homepageBannersUserCar as $banner)
+                    <img src="{{ asset('images/banner/' . $banner->image) }}" alt="Used Cars Banner">
+                @endforeach
                     <div class="side-banner-overlay">
                         <p>Find  Your Next <span> Adventure in</span> Our Pre-Owned <span> Selection.</span></p>
                     </div>
@@ -398,7 +400,11 @@ $currentCurrencyId = session('currencyId', '0');
            
             <div class="col-md-3">
                 <div class="side-banner">
-                    <img src="{{asset('frontend')}}/images/side-banner-2.png" alt="">
+                    @foreach($homepageBannersFeatured_cars as $banner)
+                    <img src="{{ asset('images/banner/' . $banner->image) }}" alt="Used Cars Banner">
+                @endforeach
+
+                    {{-- <img src="{{asset('frontend')}}/images/side-banner-2.png" alt=""> --}}
                     <div class="side-banner-overlay">
                         <p>Find  Your Next <span> Adventure in</span> Our Pre-Owned <span> Selection.</span></p>
                     </div>
