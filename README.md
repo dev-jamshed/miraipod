@@ -6,6 +6,7 @@ Welcome to **Miraipod**, a seamless and user-friendly platform where users can b
 
 ### 🏎️ Car Listings
 - Browse a vast collection of new and used cars
+- Special category for **imported cars from China**
 - Filter by brand, model, price, year, and mileage
 - View high-quality images and detailed descriptions
 
@@ -19,7 +20,7 @@ Welcome to **Miraipod**, a seamless and user-friendly platform where users can b
 - Check real-time availability
 
 ### 🛒 Smooth Buying Process
-- Secure online purchasing with multiple payment options
+- Secure online purchasing process
 - Instant confirmation & order tracking
 - User-friendly checkout process
 
@@ -44,10 +45,6 @@ Welcome to **Miraipod**, a seamless and user-friendly platform where users can b
 - Track orders and purchase history
 - Edit profile and preferences
 
-### 📦 Dealer & Seller Management
-- Sellers can list their cars for sale
-- Dealers get a dedicated dashboard for managing their inventory
-
 ### 🔔 Notifications & Alerts
 - Receive alerts about price drops, new arrivals, and special offers
 
@@ -55,15 +52,13 @@ Welcome to **Miraipod**, a seamless and user-friendly platform where users can b
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Laravel
 - **Database:** MySQL
-- **Authentication:** Laravel Sanctum
-- **Payment Gateway:** Stripe / PayPal
-- **Hosting:** Vercel / Heroku
+- **Hosting:** cPanel
 
 ## 🏗️ Installation & Setup
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/miraipod.git
+   git clone https://github.com/dev-jamshed/miraipod.git
    cd miraipod
    ```
 
@@ -75,7 +70,7 @@ Welcome to **Miraipod**, a seamless and user-friendly platform where users can b
 
 3. Configure environment variables:
    - Create a `.env` file in the root directory
-   - Add required API keys and database credentials
+   - Add required database credentials
 
 4. Run database migrations:
    ```sh
@@ -105,7 +100,7 @@ This project is licensed under the **MIT License**.
 We welcome contributions! Feel free to submit pull requests or report issues.
 
 ## 📞 Contact
-For any inquiries, reach out to us at: [your-email@example.com](mailto:your-email@example.com)
+For any inquiries, reach out to us at: jamshedlinkedin@gmail.com(mailto:jamshedlinkedin@gmail.com)
 
 ---
 
