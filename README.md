@@ -94,7 +94,7 @@ This project is licensed under the **MIT License**.
 We welcome contributions! Feel free to submit pull requests or report issues.
 
 ## 📞 Contact
-For any inquiries, reach out to us at: jamshedlinkedin@gmail.com(mailto:jamshedlinkedin@gmail.com)
+For any inquiries, reach out to us at: jamshedlinkedin@gmail.com
 
 ---
 
