@@ -87,12 +87,6 @@ Welcome to **Miraipod**, a seamless and user-friendly platform where users can b
    http://localhost:8000
    ```
 
-## 🎯 Future Enhancements
-- AI-powered car recommendations
-- Augmented Reality (AR) car preview
-- Blockchain-based secure transactions
-- Integrated insurance & warranty options
-
 ## 📄 License
 This project is licensed under the **MIT License**.
 
